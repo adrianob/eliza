@@ -36,11 +36,11 @@ while True:
         key.append(formatted_line[1])
 
         next_line = input_file.readline().rstrip()
-        token = next_line.split(':')[0]
+        token = next_line.split(':')[0].strip()
         decomp = []
 
-        while (token in [' decomp', ' reasmb']):
-            if token == ' decomp':
+        while (token in ['decomp', 'reasmb']):
+            if token == 'decomp':
                 if ( len(decomp) > 0 ):
                     key.append(decomp)
                 decomp = []
@@ -50,7 +50,7 @@ while True:
                 decomp[1].append(next_line.split(':')[1])
 
             next_line = input_file.readline().rstrip()
-            token = next_line.split(':')[0]
+            token = next_line.split(':')[0].strip()
 
         if ( len(decomp) > 0 ):
             key.append(decomp)
