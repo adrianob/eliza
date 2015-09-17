@@ -1,0 +1,144 @@
+pre: . 
+pre: , 
+pre: ? 
+pre: tem  
+pre: a 
+pre: o 
+pre: do 
+pre: da  
+pre: desculpa desculpe
+pre: obrigada obrigado
+synon: esposa mulher
+synon: trivia curiosidade curiosidades fatos fato
+synon: trabalho emprego sustento
+synon: ator atores atriz atrizes elenco
+synon: meth metanfetamina droga
+synon: quote quotes citação citações
+synon: musica musicas trilha sonora
+synon: inicio iniciou lancamento lancado estreia
+synon: fim final desfecho termino terminado
+synon: premio premios premiacoes emmy award
+synon: serie seriado
+synon: quantos quantas quantidade
+synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* 
+synon: parceiro colega 
+synon: bordao frase
+synon: Walt Walter
+synon: resumo sinopse sumario
+key: @hahaha 1
+	decomp: *
+	reasmb: O que é tão engraçado?
+key: @quantos 8
+	decomp: * @quantos episodios *
+		reasmb: Foram produzidos 62 episódios.
+	decomp: * @quantos temporadas *
+		reasmb: Foram produzidas cinco temporadas.
+	decomp: * @quantos episodios primeira *
+		reasmb: A primeira temporada tem X episódios.
+	decomp: * @quantos episodios segunda *
+		reasmb: A segunda temporada tem X episódios.
+	decomp: * @quantos episodios terceira *
+		reasmb: A terceira temporada tem X episódios.
+	decomp: * @quantos episodios quarta *
+		reasmb: A quarta temporada tem X episódios.
+	decomp: * @quantos episodios quinta *
+		reasmb: A quinta temporada tem X episódios.
+	decomp: * @quantos anos voce *
+		reasmb: A minha idade não é importante.
+key: @sumario 8
+	decomp: * @sumario @serie *
+		reasmb: <Sumario da série>
+	decomp: * @sumario primeira *
+		reasmb: <Sumario da primeira temporada>
+	decomp: * @sumario segunda *
+		reasmb: <Sumario da segunda temporada>
+	decomp: * @sumario terceira *
+		reasmb: <Sumario da terceira temporada>
+	decomp: * @sumario quarta *
+		reasmb: <Sumario da quarta temporada>
+	decomp: * @sumario quinta *
+		reasmb: <Sumario da quinta temporada>
+key: quando 8
+	decomb: * quando @inicio *
+		reasmb: O seriado foi lançado em 2008.
+	decomp: * quando @fim *
+		reasmb: O seriado terminou em 2013.
+key: porque? 2
+	decomp: *
+		reasmb: 'Because I say so.'
+key: @desculpe 2
+	decomp: *
+		reasmb: 
+key: @obrigado 2
+	decomp: *
+		reasmb: De nada.
+		reasmb: Não há de quê.
+key: @trivia 10
+	decomp: *
+		reasmb: Vince Gilligan revelou que Jesse Pinkman estava previsto para morrer na primeira temporada, mas mudou de ideia após a performance do ator Aaron Paul.
+		reasmb: Apenas duas vezes na série Jesse se refere à Walt pelo primeiro nome.
+		reasmb: O ator que interpreta Walt Jr. tem paralisia cerebral, mas seus problemas não são tão intensos quanto ao seu personagem.
+		reasmb: Vince Gilligan não queria que a série se estendesse ficasse ruim, então decidiu finalizá-la na quinta temporada.
+		reasmb: Na série The Walking Dead, é sugerido que Jesse é o traficante de drogas de Merle Dixon.
+		reasmb: A série teve 62 episódios. O 62 elemento da tabela periódica é o Samário, usado para tratar câncer de pulmão.
+		reasmb: Jesse e Walt Jr. nunca se encontram durante a série inteira.
+		reasmb: 270 pessoas morreram na série (incluindo as do acidente de avião)
+		reasmb: Walter morre no mesmo dia que nasceu, 7 de setembro.
+		reasmb: Walter e Jesse são os únicos personagens que aparecem em todos os episódios da série.
+key: DEA 1
+	decomp: *
+		reasmb: Divisão que Hank trabalha na polícia, no combate às drogas.
+key: advogado 5
+	decomp: *
+		reasmb: O advogado de Walter era Saul Goodman.
+key: Saul 9
+	decomp: * @ator Saul *
+		reasmb: Bob Odenkirk
+	decomp: * Saul @bordao *
+		reasmb: Better Call Saul
+	decomp: * @trabalho Saul *
+		reasmb: Saul trabalha como advogado.
+key: @Walter 10
+	decomp: * @ator Walter *
+		reasmb: Bryan Cranston.
+	decomp: * @doenca Walter *
+		reasmb: Walter White teve câncer de pulmão.
+	decomp: * @trabalho Walter *
+		reasmb: Professor de química do ensino médio e nas horas vagas produtor de metanfetamina.
+	decomp: * filho Walter *
+		reasmb: Walter White, Jr.
+	decomp: * filha Walter *
+		reasmb:
+	decomp: * @esposa Walter *
+		reasmb: Skyler White
+	decomp: * @parceiro Walter *
+		reasmb: Jesse Pinkman
+	decomp: * cunhado Walter *
+		reasmb: Hank Schrader
+key: Skyler 9
+	decomp: * @ator Skyler *
+		reasmb: Anna Gunn
+	decomp: * @marido Skyler *
+		reasmb:
+	decomp: * filho Skyler *
+		reasmb: Walter White, Jr.
+	decomp: * filha Skyler *
+		reasmb:
+	decomp: * irma Skyler *
+		reasmb: Marie Schrader
+key: Hank 9
+	decomp: * @ator Hank *
+		reasmb: Dean Norris
+	decomp: * @trabalho Hank *
+		reasmb: Hank trabalha na polícia, no combate às drogas (DEA).
+	decomp: * @esposa Hank *
+		reasmb: Marie Schrader
+key: Metanfetamina 2
+	decomp: * 
+		reasmb: Droga fabricada por Walter e Jesse.
+key: knock 2
+	decomp: *
+	reasmb: I am the one who knocks
+key: say 2
+	decomp: * say my name *
+	reasmb: Heisenberg
