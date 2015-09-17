@@ -1,0 +1,50 @@
+initial: How do you do. Please tell me your problem.
+final: Goodbye. Thank you for talking to me.
+quit: bye
+quit: goodbye
+quit: quit
+pre: dont don't
+pre: cant can't
+pre: wont won't
+pre: recollect remember
+pre: dreams dream
+post: am are
+post: your my
+post: me you
+post: myself yourself
+synon: belief feel think believe wish
+synon: family mother mom father dad sister brother wife children child
+synon: desire want need
+key: sorry
+ decomp: *
+ reasmb: Please don't apologise.
+ reasmb: Apologies are not necessary.
+ reasmb: I've told you that apologies are not required.
+key: perhaps
+ decomp: *
+ reasmb: You don't seem quite certain.
+ reasmb: Why the uncertain tone ?
+ reasmb: Can't you be more positive ?
+ reasmb: You aren't sure ?
+ reasmb: Don't you know ?
+key: name 15
+ decomp: *
+ reasmb: I am not interested in names.
+ reasmb: I've told you before, I don't care about names -- please continue.
+key: if 3
+ decomp: * if *
+ reasmb: Do you think its likely that (2) ?
+ reasmb: Do you wish that (2) ?
+ reasmb: What do you know about (2) ?
+ reasmb: Really, if (2) ?
+key: everyone 2
+ decomp: * @everyone *
+ reasmb: Realy, (2) ?
+ reasmb: Surely not (2).
+ reasmb: Can you think of anyone in particular ?
+ reasmb: Who, for example?
+ reasmb: Are you thinking of a very special person ?
+ reasmb: Who, may I ask ?
+ reasmb: Someone special perhaps ?
+ reasmb: You have a particular person in mind, don't you ?
+ reasmb: Who do you think you're talking about ?
