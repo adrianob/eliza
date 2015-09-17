@@ -1,8 +1,8 @@
 initial: How do you do. Please tell me your problem.
 final: Goodbye. Thank you for talking to me.
-quit: bye
-quit: goodbye
-quit: quit
+sair: bye
+sair: goodbye
+sair: quit
 pre: dont don't
 pre: cant can't
 pre: wont won't
@@ -17,6 +17,10 @@ synon: family mother mom father dad sister brother wife children child
 synon: desire want need
 key: sorry
  decomp: *
+ reasmb: Please don't apologise.
+ reasmb: Apologies are not necessary.
+ reasmb: I've told you that apologies are not required.
+ decomp: * ads
  reasmb: Please don't apologise.
  reasmb: Apologies are not necessary.
  reasmb: I've told you that apologies are not required.
