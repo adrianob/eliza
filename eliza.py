@@ -1,7 +1,7 @@
 import re
+import pprint
 
 input_file = open('input.txt', 'r' )
-
 
 language = {
     'initial': '',
@@ -10,14 +10,14 @@ language = {
     'sair': [],
     'synon': [],
     'pre': [],
-    'chaves': [
-                #['sorry', [ ['*', [] ] ] ],
-            ]
+    'keys': []
 
 }
 
-
-for line in input_file:
+while True:
+    line = input_file.readline().rstrip()
+    if not line:
+        break
     formatted_line = line.split(':')
     if formatted_line[0] == 'initial':
         language['initial'] = formatted_line[1]
@@ -32,36 +32,31 @@ for line in input_file:
     elif formatted_line[0] == 'synon':
         language['synon'].append(formatted_line[1])
     elif formatted_line[0] == 'key':
-        chave = []
-        chave[0] = formatted_line[1]
-        chave[1] = []
+        key = []
+        key.append(formatted_line[1])
 
-        key_line = input_file.readline()
+        next_line = input_file.readline().rstrip()
+        token = next_line.split(':')[0]
+        decomp = []
 
-        while(key_line[0] == ' '):
-            formatted_key_line = line.split(':')
+        while (token in [' decomp', ' reasmb']):
+            if token == ' decomp':
+                if ( len(decomp) > 0 ):
+                    key.append(decomp)
+                decomp = []
+                decomp.append(next_line.split(':')[1])
+                decomp.append([])
+            else:
+                decomp[1].append(next_line.split(':')[1])
 
-            if formatted_key_line[0] == 'decomp':
-                chave[1][0] = formatted_line[1]
-                key_line = input_file.readline()
-                formatted_key_line = line.split(':')
-                while(formatted_key_line[0] == ' reasmb'):
-                    chave[1][1] = append(formatted_key_line[1])
-                    key_line = input_file.readline()
-                    formatted_key_line = line.split(':')
+            next_line = input_file.readline().rstrip()
+            token = next_line.split(':')[0]
 
-            key_line = input_file.readline()
+        if ( len(decomp) > 0 ):
+            key.append(decomp)
+        language['keys'].append(key)
 
-
-
-
-
-
-
-
-
-
-for x in language['sair']:
-    print x,
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(language)
 
 input_file.close()

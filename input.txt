@@ -21,9 +21,13 @@ key: sorry
  reasmb: Apologies are not necessary.
  reasmb: I've told you that apologies are not required.
  decomp: * ads
- reasmb: Please don't apologise.
- reasmb: Apologies are not necessary.
- reasmb: I've told you that apologies are not required.
+ reasmb: Pleas9843 don't apologise.
+ reasmb: Apolo9843ies are not necessary.
+ reasmb: I've 9843old you that apologies are not required.
+ decomp: * ads
+ reasmb: Pleas9843 don't apologise.
+ reasmb: Apolo9843ies are not necessary.
+ reasmb: I've 9843old you that apologies are not required.
 key: perhaps
  decomp: *
  reasmb: You don't seem quite certain.
