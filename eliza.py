@@ -44,7 +44,7 @@ def read_key(keyword):
 
     #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
     if keyword.split()[-1].isdigit():
-        decomps.append(keyword.split()[-1])
+        decomps.append(int(keyword.split()[-1]))
     else:
         decomps.append(1)
 
@@ -105,9 +105,11 @@ print language['initial']
 while True:
     input_text = raw_input()
     input_text = input_text.split()
+    #realiza pre-substituicoes
     input_text[:] = [word if word not in language['pre'] else language['pre'][word] for word in input_text]
     if " ".join(input_text) in language['quit']:
         print language['final']
         break
+    #acha keywords no input do usuario
     keywords = [word for word in input_text if word in language['keys']]
-
+    keywords = sorted(keywords, reverse= True, key=lambda key: language['keys'][key][0])
