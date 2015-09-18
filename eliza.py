@@ -26,7 +26,7 @@ def InsereDicionario(string,dicionario):
         dicionario[palavra[0]] = palavra[1]
     # Senao, tem zero ou mais de duas palavras. Simplesmente ignora a linha
     else:
-        print("AVISO: Problema de sintaxe, linha {0}".format(linha_atual))
+        print("AVISO: Problema de sintaxe")
 
 def read_key(data):
     key = []
