@@ -55,6 +55,7 @@ def read_key(data):
     if (token == 'key'): read_key(data)
 
 def read_file(input_file):
+    linha_atual = 1
     for line in input_file:
         formatted_line = line.strip().split(':')
         token, data = formatted_line[0], formatted_line[1].strip()
@@ -72,6 +73,7 @@ def read_file(input_file):
             language['sair'].append(data)
         elif token == 'synon':
             language['synon'].append(data)
+        linha_atual += 1
 
 input_file = open('script_bb.txt', 'r' )
 read_file(input_file)
