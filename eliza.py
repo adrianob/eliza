@@ -97,17 +97,17 @@ def read_file(input_file):
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(language)
+#pp.pprint(language)
 
 input_file.close()
 
 print language['initial']
 while True:
     input_text = raw_input()
-    if input_text in language['quit']:
-        print language['final']
-        break
     input_text = input_text.split()
     input_text[:] = [word if word not in language['pre'] else language['pre'][word] for word in input_text]
+    if " ".join(input_text) in language['quit']:
+        print language['final']
+        break
     keywords = [word for word in input_text if word in language['keys']]
 
