@@ -10,7 +10,7 @@ language = {
     'pre': dict(),
     'post': dict(),
     'sair': [],
-    'synon': [],
+    'synon': dict(),
     'keys': []
 }
 
@@ -19,6 +19,25 @@ def InsereDicionario(string,dicionario):
     assert dicionario is not None
     palavra = string.split()
     dicionario[palavra[0]] = " ".join(palavra[1:])
+
+# Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
+def read_synons(string,dicionario):
+    lista_sinonimos = []
+    sinonimos = string.split()
+    # Se não há palavras suficientes
+    if len(sinonimos) <= 1:
+        print("AVISO: Problema de sintaxe")
+        return
+    lista_sinonimos.append(sinonimos)
+    # Para cada palavra, associa ela a sua lista de sinonimos
+    for palavra in lista_sinonimos[-1]:
+        dicionario[palavra] = lista_sinonimos[-1]
+
+# Dado duas string, retorna True se elas são sinônimas, False se não são
+def are_sinonims(string1,string2):
+    l1 = language['synon'].get(string1)
+    l2 = language['synon'].get(string2)
+    return l1 is not None and l2 is not None and l1 == l2
 
 def read_key(data):
     key = []
@@ -63,7 +82,7 @@ def read_file(input_file):
         elif token == 'sair':
             language['sair'].append(data)
         elif token == 'synon':
-            language['synon'].append(data)
+            read_synons(data,language['synon'])
 
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
