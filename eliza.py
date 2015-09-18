@@ -39,8 +39,14 @@ def are_sinonims(string1,string2):
     l2 = language['synon'].get(string2)
     return l1 is not None and l2 is not None and l1 == l2
 
-def read_key(data):
+def read_key(keyword):
     decomps = []
+
+    #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
+    if keyword.split()[-1].isdigit():
+        decomps.append(keyword.split()[-1])
+    else:
+        decomps.append(1)
 
     line = next(input_file).strip()
     token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
@@ -61,8 +67,13 @@ def read_key(data):
         else: token = ''
 
     if ( len(decomp) > 0 ): decomps.append(decomp)
-    language['keys'][data] = decomps
-    if (token == 'key'): read_key(data)
+    if keyword.split()[-1].isdigit():
+        keyword = keyword.split()
+        keyword.pop()
+        keyword = " ".join(keyword)
+    language['keys'][keyword] = decomps
+    if (token == 'key'):
+        read_key(data)
 
 def read_file(input_file):
     for line in input_file:
@@ -86,7 +97,7 @@ def read_file(input_file):
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(language)
+pp.pprint(language)
 
 input_file.close()
 
