@@ -113,3 +113,18 @@ while True:
     #acha keywords no input do usuario
     keywords = [word for word in input_text if word in language['keys']]
     keywords = sorted(keywords, reverse= True, key=lambda key: language['keys'][key][0])
+
+    done = False
+    for key in keywords:
+        for decomp in language['keys'][key][1:]:
+            regex = decomp[0].replace('*','(.*)')
+            #procura uma decomposicao que aceita a regex
+            input_match = re.search(regex, " ".join(input_text))
+            if input_match is not None:
+                #troca placeholders pelos grupos resultantes da regex
+                print re.sub('\(\d+\)',
+                        lambda match: input_match.group((int(match.group(0).replace('(','').replace(')','')))),
+                        decomp[1][0])
+                done = True
+                break
+        if done: break
