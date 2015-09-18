@@ -6,14 +6,28 @@ input_file = open('input.txt', 'r' )
 language = {
     'initial': '',
     'final': '',
-    'post': [],
+    'pre': dict(),
+    'post': dict(),
     'sair': [],
     'synon': [],
-    'pre': [],
     'keys': []
-
 }
 
+# Dado uma string e um dicionario, associa a primeira palavra da string a segunda no dicionario
+def InsereDicionario(string,dicionario):
+    assert dicionario is not None
+    palavra = string.split()
+    # Se tem só uma palavra, deve associar à uma string vazia
+    if len(palavra) == 1:
+        dicionario[palavra[0]] = ''
+    # Se tem duas palavras, associa a primeira à segunda
+    elif len(palavra) == 2:
+        dicionario[palavra[0]] = palavra[1]
+    # Senao, tem zero ou mais de duas palavras. Simplesmente ignora a linha
+    else:
+        print("AVISO: Problema de sintaxe, linha {0}".format(linha_atual))
+
+linha_atual = 1
 while True:
     line = input_file.readline().rstrip()
     if not line:
@@ -26,9 +40,9 @@ while True:
     elif formatted_line[0] == 'sair':
         language['sair'].append(formatted_line[1])
     elif formatted_line[0] == 'pre':
-        language['pre'].append(formatted_line[1])
+        InsereDicionario(formatted_line[1],language['pre'])
     elif formatted_line[0] == 'post':
-        language['post'].append(formatted_line[1])
+        InsereDicionario(formatted_line[1],language['post'])
     elif formatted_line[0] == 'synon':
         language['synon'].append(formatted_line[1])
     elif formatted_line[0] == 'key':
@@ -55,6 +69,7 @@ while True:
         if ( len(decomp) > 0 ):
             key.append(decomp)
         language['keys'].append(key)
+    linha_atual+= 1
 
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(language)
