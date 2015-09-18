@@ -10,10 +10,11 @@ language = {
     'pre': dict(),
     'post': dict(),
     'sair': [],
-    'synon': [],
+    'synon': dict(),
     'keys': []
 }
 
+    
 # Dado uma string e um dicionario, associa a primeira palavra da string a segunda no dicionario
 def InsereDicionario(string,dicionario):
     assert dicionario is not None
@@ -27,6 +28,28 @@ def InsereDicionario(string,dicionario):
     # Senao, tem zero ou mais de duas palavras. Simplesmente ignora a linha
     else:
         print("AVISO: Problema de sintaxe")
+
+# Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
+lista_sinonimos = []
+def read_synons(string,dicionario):
+    sinonimos = string.split()
+    # Se não há palavras suficientes
+    if len(sinonimos) <= 1:
+        print("AVISO: Problema de sintaxe")
+        return
+    lista_sinonimos.append(sinonimos)
+    # Para cada palavra, associa ela a sua lista de sinonimos
+    for palavra in lista_sinonimos[-1]:
+        dicionario[palavra] = lista_sinonimos[-1]
+
+# Dado duas string, retorna True se elas são sinônimas, False se não são
+def are_sinonims(string1,string2):
+    l1 = language['synon'].get(string1)
+    l2 = language['synon'].get(string2)
+    if l1 is not None and l2 is not None and l1 == l2:
+        return True
+    else:
+        return False
 
 def read_key(data):
     key = []
@@ -71,7 +94,7 @@ def read_file(input_file):
         elif token == 'sair':
             language['sair'].append(data)
         elif token == 'synon':
-            language['synon'].append(data)
+            read_synons(data,language['synon'])
 
 input_file = open('script_bb.txt', 'r' )
 read_file(input_file)
