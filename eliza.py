@@ -14,20 +14,11 @@ language = {
     'keys': []
 }
 
-    
-# Dado uma string e um dicionario, associa a primeira palavra da string a segunda no dicionario
+# Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
 def InsereDicionario(string,dicionario):
     assert dicionario is not None
     palavra = string.split()
-    # Se tem só uma palavra, deve associar à uma string vazia
-    if len(palavra) == 1:
-        dicionario[palavra[0]] = ''
-    # Se tem duas palavras, associa a primeira à segunda
-    elif len(palavra) == 2:
-        dicionario[palavra[0]] = palavra[1]
-    # Senao, tem zero ou mais de duas palavras. Simplesmente ignora a linha
-    else:
-        print("AVISO: Problema de sintaxe")
+    dicionario[palavra[0]] = " ".join(palavra[1:])
 
 # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
 def read_synons(string,dicionario):
@@ -93,7 +84,7 @@ def read_file(input_file):
         elif token == 'synon':
             read_synons(data,language['synon'])
 
-input_file = open('script_bb.txt', 'r' )
+input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(language)
