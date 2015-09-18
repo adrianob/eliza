@@ -30,8 +30,8 @@ def InsereDicionario(string,dicionario):
         print("AVISO: Problema de sintaxe")
 
 # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
-lista_sinonimos = []
 def read_synons(string,dicionario):
+    lista_sinonimos = []
     sinonimos = string.split()
     # Se não há palavras suficientes
     if len(sinonimos) <= 1:
@@ -46,10 +46,7 @@ def read_synons(string,dicionario):
 def are_sinonims(string1,string2):
     l1 = language['synon'].get(string1)
     l2 = language['synon'].get(string2)
-    if l1 is not None and l2 is not None and l1 == l2:
-        return True
-    else:
-        return False
+    return l1 is not None and l2 is not None and l1 == l2
 
 def read_key(data):
     key = []
