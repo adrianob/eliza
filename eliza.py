@@ -11,7 +11,7 @@ language = {
     'post': dict(),
     'quit': [],
     'synon': dict(),
-    'keys': []
+    'keys': dict()
 }
 
 # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
@@ -40,8 +40,7 @@ def are_sinonims(string1,string2):
     return l1 is not None and l2 is not None and l1 == l2
 
 def read_key(data):
-    key = []
-    key.append(data)
+    decomps = []
 
     line = next(input_file).strip()
     token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
@@ -49,7 +48,7 @@ def read_key(data):
 
     while (token in ['decomp', 'reasmb']):
         if token == 'decomp':
-            if ( len(decomp) > 0 ): key.append(decomp)
+            if ( len(decomp) > 0 ): decomps.append(decomp)
             decomp = []
             decomp.append(data)
             decomp.append([])
@@ -61,8 +60,8 @@ def read_key(data):
             token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
         else: token = ''
 
-    if ( len(decomp) > 0 ): key.append(decomp)
-    language['keys'].append(key)
+    if ( len(decomp) > 0 ): decomps.append(decomp)
+    language['keys'][data] = decomps
     if (token == 'key'): read_key(data)
 
 def read_file(input_file):
@@ -99,5 +98,5 @@ while True:
         break
     input_text = input_text.split()
     input_text[:] = [word if word not in language['pre'] else language['pre'][word] for word in input_text]
-    print input_text
+    keywords = [word for word in input_text if word in language['keys']]
 
