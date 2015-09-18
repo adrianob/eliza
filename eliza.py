@@ -9,7 +9,7 @@ language = {
     'final': '',
     'pre': dict(),
     'post': dict(),
-    'sair': [],
+    'quit': [],
     'synon': dict(),
     'keys': []
 }
@@ -79,14 +79,24 @@ def read_file(input_file):
             InsereDicionario(data,language['post'])
         elif token == 'key':
             read_key(data)
-        elif token == 'sair':
-            language['sair'].append(data)
+        elif token == 'quit':
+            language['quit'].append(data)
         elif token == 'synon':
             read_synons(data,language['synon'])
 
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(language)
+#pp.pprint(language)
 
 input_file.close()
+
+print language['initial']
+while True:
+    input_text = raw_input()
+    if input_text in language['quit']:
+        break
+    input_text = input_text.split()
+    input_text[:] = [word if word not in language['pre'] else language['pre'][word] for word in input_text]
+    print input_text
+
