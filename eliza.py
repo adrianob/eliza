@@ -102,14 +102,15 @@ def generate_response(input_text, keywords):
             #procura uma decomposicao que aceita a regex
             input_match = re.search(regex, " ".join(input_text))
             if input_match is not None:
-                #troca placeholders pelos grupos resultantes da regex
+                #troca placeholders pelos grupos resultantes da regex e realiza substituicoes post
                 result = re.sub('\((\d+)\)',
-                        lambda match: input_match.group((int(match.group(1)))),
+                        lambda match: " ".join(
+                            [word if word not in language['post'] 
+                                  else language['post'][word] 
+                                  for word in input_match.group((int(match.group(1)))).split()]
+                            ),
                         decomp[1][0])
-                result = result.split()
-                #realiza substituicoes post
-                result[:] = [word if word not in language['post'] else language['post'][word] for word in result]
-                print " ".join(result)
+                print result
 
                 done = True
                 break
