@@ -39,17 +39,25 @@ def are_synonyms(string1,string2):
     l2 = language['synon'].get(string2)
     return l1 is not None and l2 is not None and l1 == l2
 
+def read_next_line(input_file):
+    line = next(input_file,'').strip()
+    if line:
+        token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
+    else: token,data = '',''
+    return token, data
+
 def read_key(keyword):
     decomps = []
 
     #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
     if keyword.split()[-1].isdigit():
-        decomps.append(int(keyword.split()[-1]))
-    else:
-        decomps.append(1)
+        keyword = keyword.split()
+        decomps.append(int(keyword[-1]))
+        keyword.pop()
+        keyword = " ".join(keyword)
+    else: decomps.append(1)
 
-    line = next(input_file).strip()
-    token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
+    token, data = read_next_line(input_file)
     decomp = []
 
     while (token in ['decomp', 'reasmb']):
@@ -61,19 +69,11 @@ def read_key(keyword):
         else:
             decomp[1].append(data)
 
-        line = next(input_file,'').strip()
-        if line:
-            token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
-        else: token = ''
+        token, data = read_next_line(input_file)
 
     if ( len(decomp) > 0 ): decomps.append(decomp)
-    if keyword.split()[-1].isdigit():
-        keyword = keyword.split()
-        keyword.pop()
-        keyword = " ".join(keyword)
     language['keys'][keyword] = decomps
-    if (token == 'key'):
-        read_key(data)
+    if (token == 'key'): read_key(data)
 
 def read_file(input_file):
     for line in input_file:
@@ -103,8 +103,8 @@ def generate_response(input_text, keywords):
             input_match = re.search(regex, " ".join(input_text))
             if input_match is not None:
                 #troca placeholders pelos grupos resultantes da regex
-                result = re.sub('\(\d+\)',
-                        lambda match: input_match.group((int(match.group(0).replace('(','').replace(')','')))),
+                result = re.sub('\((\d+)\)',
+                        lambda match: input_match.group((int(match.group(1)))),
                         decomp[1][0])
                 result = result.split()
                 #realiza substituicoes post
@@ -118,7 +118,7 @@ def generate_response(input_text, keywords):
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(language)
+pp.pprint(language)
 
 input_file.close()
 
