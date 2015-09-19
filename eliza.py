@@ -19,7 +19,6 @@ class Language(object):
 
     def build_dictionary(self):
         for line in self.input_file:
-            print line
             formatted_line = line.strip().split(':')
             token, data = formatted_line[0], formatted_line[1].strip()
             if token == 'initial':
@@ -132,16 +131,16 @@ class Language(object):
             if done: break
 
 input_file = open('eliza.txt', 'r' )
-language = Language(input_file)
-language.build_dictionary()
+bot = Language(input_file)
+bot.build_dictionary()
 
 pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(language.language)
+#pp.pprint(bot.language)
 
 input_file.close()
 
-print language.language['initial']
+print bot.language['initial']
 while True:
     input_text = raw_input()
-    language.generate_response(input_text)
+    bot.generate_response(input_text)
 
