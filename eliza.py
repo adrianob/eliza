@@ -4,7 +4,7 @@ import re
 import pprint
 import sys
 
-class Language(object):
+class LanguageDict(object):
     def __init__(self, input_file):
         self.language = {
             'initial': '',
@@ -36,7 +36,6 @@ class Language(object):
             elif token == 'synon':
                 self.read_synons(data, self.language['synon'])
 
-
     # Dado duas string, retorna True se elas são sinônimas, False se não são
     def are_synonyms(self,string1,string2):
         l1 = self.language['synon'].get(string1)
@@ -49,18 +48,6 @@ class Language(object):
             token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
         else: token,data = '',''
         return token, data
-
-    @staticmethod
-    def get_weight(keyword):
-        weight = 1
-        #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
-        if keyword.split()[-1].isdigit():
-            keyword = keyword.split()
-            weight = int(keyword[-1])
-            keyword.pop()
-            keyword = " ".join(keyword)
-
-        return keyword, weight
 
     def read_key(self, keyword):
         decomps = []
@@ -85,6 +72,43 @@ class Language(object):
         if ( len(decomp) > 0 ): decomps.append(decomp)
         self.language['keys'][keyword] = decomps
         if (token == 'key'): self.read_key(data)
+
+    @staticmethod
+    def get_weight(keyword):
+        weight = 1
+        #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
+        if keyword.split()[-1].isdigit():
+            keyword = keyword.split()
+            weight = int(keyword[-1])
+            keyword.pop()
+            keyword = " ".join(keyword)
+
+        return keyword, weight
+
+    # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
+    @staticmethod
+    def insert_sub(string, dicionario):
+        assert dicionario is not None
+        palavra = string.split()
+        dicionario[palavra[0]] = " ".join(palavra[1:])
+
+    # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
+    @staticmethod
+    def read_synons(string, dicionario):
+        lista_sinonimos = []
+        sinonimos = string.split()
+        # Se não há palavras suficientes
+        if len(sinonimos) <= 1:
+            print("AVISO: Problema de sintaxe")
+            return
+        lista_sinonimos.append(sinonimos)
+        # Para cada palavra, associa ela a sua lista de sinonimos
+        for palavra in lista_sinonimos[-1]:
+            dicionario[palavra] = lista_sinonimos[-1]
+
+class Bot(object):
+    def __init__(self, dictionary):
+        self.language = dictionary
 
     def substitute_pre(self, input_text):
         input_text = input_text.split()
@@ -129,30 +153,10 @@ class Language(object):
                     break
             if done: break
 
-    # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
-    @staticmethod
-    def insert_sub(string, dicionario):
-        assert dicionario is not None
-        palavra = string.split()
-        dicionario[palavra[0]] = " ".join(palavra[1:])
-
-    # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
-    @staticmethod
-    def read_synons(string, dicionario):
-        lista_sinonimos = []
-        sinonimos = string.split()
-        # Se não há palavras suficientes
-        if len(sinonimos) <= 1:
-            print("AVISO: Problema de sintaxe")
-            return
-        lista_sinonimos.append(sinonimos)
-        # Para cada palavra, associa ela a sua lista de sinonimos
-        for palavra in lista_sinonimos[-1]:
-            dicionario[palavra] = lista_sinonimos[-1]
-
 input_file = open('eliza.txt', 'r' )
-bot = Language(input_file)
-bot.build_dictionary()
+dic = LanguageDict(input_file)
+dic.build_dictionary()
+bot = Bot(dic.language)
 
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(bot.language)
@@ -163,4 +167,3 @@ print bot.language['initial']
 while True:
     input_text = raw_input()
     bot.generate_response(input_text)
-
