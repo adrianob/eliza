@@ -15,7 +15,7 @@ language = {
 }
 
 # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
-def InsereDicionario(string,dicionario):
+def insert_sub(string,dicionario):
     assert dicionario is not None
     palavra = string.split()
     dicionario[palavra[0]] = " ".join(palavra[1:])
@@ -34,7 +34,7 @@ def read_synons(string,dicionario):
         dicionario[palavra] = lista_sinonimos[-1]
 
 # Dado duas string, retorna True se elas são sinônimas, False se não são
-def are_sinonims(string1,string2):
+def are_synonyms(string1,string2):
     l1 = language['synon'].get(string1)
     l2 = language['synon'].get(string2)
     return l1 is not None and l2 is not None and l1 == l2
@@ -84,9 +84,9 @@ def read_file(input_file):
         elif token == 'final':
             language['final'] = data
         elif token == 'pre':
-            InsereDicionario(data,language['pre'])
+            insert_sub(data,language['pre'])
         elif token == 'post':
-            InsereDicionario(data,language['post'])
+            insert_sub(data,language['post'])
         elif token == 'key':
             read_key(data)
         elif token == 'quit':
