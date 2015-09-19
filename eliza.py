@@ -94,6 +94,27 @@ def read_file(input_file):
         elif token == 'synon':
             read_synons(data,language['synon'])
 
+def generate_response(input_text, keywords):
+    done = False
+    for key in keywords:
+        for decomp in language['keys'][key][1:]:
+            regex = decomp[0].replace('*','(.*)')
+            #procura uma decomposicao que aceita a regex
+            input_match = re.search(regex, " ".join(input_text))
+            if input_match is not None:
+                #troca placeholders pelos grupos resultantes da regex
+                result = re.sub('\(\d+\)',
+                        lambda match: input_match.group((int(match.group(0).replace('(','').replace(')','')))),
+                        decomp[1][0])
+                result = result.split()
+                #realiza substituicoes post
+                result[:] = [word if word not in language['post'] else language['post'][word] for word in result]
+                print " ".join(result)
+
+                done = True
+                break
+        if done: break
+
 input_file = open('eliza.txt', 'r' )
 read_file(input_file)
 pp = pprint.PrettyPrinter(indent=4)
@@ -114,22 +135,4 @@ while True:
     keywords = [word for word in input_text if word in language['keys']]
     keywords = sorted(keywords, reverse= True, key=lambda key: language['keys'][key][0])
 
-    done = False
-    for key in keywords:
-        for decomp in language['keys'][key][1:]:
-            regex = decomp[0].replace('*','(.*)')
-            #procura uma decomposicao que aceita a regex
-            input_match = re.search(regex, " ".join(input_text))
-            if input_match is not None:
-                #troca placeholders pelos grupos resultantes da regex
-                result = re.sub('\(\d+\)',
-                        lambda match: input_match.group((int(match.group(0).replace('(','').replace(')','')))),
-                        decomp[1][0])
-                result = result.split()
-                #realiza substituicoes post
-                result[:] = [word if word not in language['post'] else language['post'][word] for word in result]
-                print " ".join(result)
-
-                done = True
-                break
-        if done: break
+    generate_response(input_text, keywords)
