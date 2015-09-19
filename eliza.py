@@ -58,8 +58,8 @@ class Language(object):
 
     # Dado duas string, retorna True se elas são sinônimas, False se não são
     def are_synonyms(self,string1,string2):
-        l1 = language['synon'].get(string1)
-        l2 = language['synon'].get(string2)
+        l1 = self.language['synon'].get(string1)
+        l2 = self.language['synon'].get(string2)
         return l1 is not None and l2 is not None and l1 == l2
 
     def read_next_line(self):
