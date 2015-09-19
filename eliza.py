@@ -108,7 +108,11 @@ class LanguageDict(object):
 
 class Bot(object):
     def __init__(self, dictionary):
-        self.language = dictionary
+        self.__language = dictionary
+
+    @property
+    def language(self):
+        return self.__language
 
     def substitute_pre(self, input_text):
         input_text = input_text.split()
