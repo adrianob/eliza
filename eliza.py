@@ -36,24 +36,6 @@ class Language(object):
             elif token == 'synon':
                 self.read_synons(data, self.language['synon'])
 
-    # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
-    def insert_sub(self, string, dicionario):
-        assert dicionario is not None
-        palavra = string.split()
-        dicionario[palavra[0]] = " ".join(palavra[1:])
-
-    # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
-    def read_synons(self, string, dicionario):
-        lista_sinonimos = []
-        sinonimos = string.split()
-        # Se não há palavras suficientes
-        if len(sinonimos) <= 1:
-            print("AVISO: Problema de sintaxe")
-            return
-        lista_sinonimos.append(sinonimos)
-        # Para cada palavra, associa ela a sua lista de sinonimos
-        for palavra in lista_sinonimos[-1]:
-            dicionario[palavra] = lista_sinonimos[-1]
 
     # Dado duas string, retorna True se elas são sinônimas, False se não são
     def are_synonyms(self,string1,string2):
@@ -68,16 +50,23 @@ class Language(object):
         else: token,data = '',''
         return token, data
 
-    def read_key(self, keyword):
-        decomps = []
-
+    @staticmethod
+    def get_weight(keyword):
+        weight = 1
         #insere o peso da palavra chave no primeiro item do array, se não ouver usa 1
         if keyword.split()[-1].isdigit():
             keyword = keyword.split()
-            decomps.append(int(keyword[-1]))
+            weight = int(keyword[-1])
             keyword.pop()
             keyword = " ".join(keyword)
-        else: decomps.append(1)
+
+        return keyword, weight
+
+    def read_key(self, keyword):
+        decomps = []
+
+        keyword, weight = self.get_weight(keyword)
+        decomps.append(weight)
 
         token, data = self.read_next_line()
         decomp = []
@@ -97,45 +86,76 @@ class Language(object):
         self.language['keys'][keyword] = decomps
         if (token == 'key'): self.read_key(data)
 
-
-    def generate_response(self, input_text):
+    def substitute_pre(self, input_text):
         input_text = input_text.split()
         #realiza pre-substituicoes
         input_text[:] = [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
+        return input_text
+
+    def check_for_end(self, input_text):
         if " ".join(input_text) in self.language['quit']:
             print self.language['final']
             sys.exit(0)
-        #acha keywords no input do usuario
+
+    def create_keywords_list(self, input_text):
         keywords = [word for word in input_text if word in self.language['keys']]
-        keywords = sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
+        return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
+
+    #troca placeholders capturados na regex e realiza substituicoes post
+    def format_result(self, input_match, decomp):
+        return re.sub('\((\d+)\)',
+                lambda match: " ".join(
+                    [word if word not in self.language['post'] 
+                          else self.language['post'][word] 
+                          for word in input_match.group((int(match.group(1)))).split()]
+                    ),
+                decomp[1][0])
+
+    def generate_response(self, input_text):
+        input_text = self.substitute_pre(input_text)
+        self.check_for_end(input_text)
+        keywords = self.create_keywords_list(input_text)
 
         done = False
         for key in keywords:
-            for decomp in self.language['keys'][key][1:]:
+            decomps = self.language['keys'][key][1:]
+            for decomp in decomps:
                 regex = decomp[0].replace('*','(.*)')
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text))
                 if input_match is not None:
-                    #troca placeholders pelos grupos resultantes da regex e realiza substituicoes post
-                    result = re.sub('\((\d+)\)',
-                            lambda match: " ".join(
-                                [word if word not in self.language['post'] 
-                                      else self.language['post'][word] 
-                                      for word in input_match.group((int(match.group(1)))).split()]
-                                ),
-                            decomp[1][0])
-                    print result
-
+                    print self.format_result(input_match, decomp)
                     done = True
                     break
             if done: break
+
+    # Dado uma string e um dicionario, associa a primeira palavra da string ao restante no dicionario
+    @staticmethod
+    def insert_sub(string, dicionario):
+        assert dicionario is not None
+        palavra = string.split()
+        dicionario[palavra[0]] = " ".join(palavra[1:])
+
+    # Dado uma string com sinonimos, associa cada palavra dessa string com sua lista de sinonimos
+    @staticmethod
+    def read_synons(string, dicionario):
+        lista_sinonimos = []
+        sinonimos = string.split()
+        # Se não há palavras suficientes
+        if len(sinonimos) <= 1:
+            print("AVISO: Problema de sintaxe")
+            return
+        lista_sinonimos.append(sinonimos)
+        # Para cada palavra, associa ela a sua lista de sinonimos
+        for palavra in lista_sinonimos[-1]:
+            dicionario[palavra] = lista_sinonimos[-1]
 
 input_file = open('eliza.txt', 'r' )
 bot = Language(input_file)
 bot.build_dictionary()
 
 pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(bot.language)
+pp.pprint(bot.language)
 
 input_file.close()
 
