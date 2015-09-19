@@ -122,9 +122,14 @@ while True:
             input_match = re.search(regex, " ".join(input_text))
             if input_match is not None:
                 #troca placeholders pelos grupos resultantes da regex
-                print re.sub('\(\d+\)',
+                result = re.sub('\(\d+\)',
                         lambda match: input_match.group((int(match.group(0).replace('(','').replace(')','')))),
                         decomp[1][0])
+                result = result.split()
+                #realiza substituicoes post
+                result[:] = [word if word not in language['post'] else language['post'][word] for word in result]
+                print " ".join(result)
+
                 done = True
                 break
         if done: break
