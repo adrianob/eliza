@@ -148,7 +148,9 @@ class Bot(object):
         for key in keywords:
             decomps = self.language['keys'][key][1:]
             for decomp in decomps:
+                regex = re.sub('(\s*\*\s*)\i', '*', decomp[0])
                 regex = decomp[0].replace('*','(.*)')
+                regex = re.sub('(@\w+)', lambda match: "(" + "|".join([synon for synon in self.language['synon'][key]]) + ")", regex )
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text))
                 if input_match is not None:
