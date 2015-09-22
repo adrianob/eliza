@@ -19,7 +19,7 @@ class LanguageDict(object):
 
     def build_dictionary(self):
         for line in self.input_file:
-            formatted_line = line.strip().split(':')
+            formatted_line = line.decode('utf-8').strip().split(':')
             token, data = formatted_line[0], formatted_line[1].strip()
             if token == 'initial':
                 self.language['initial'] = data
@@ -43,7 +43,7 @@ class LanguageDict(object):
         return l1 is not None and l2 is not None and l1 == l2
 
     def read_next_line(self):
-        line = next(self.input_file,'').strip()
+        line = next(self.input_file,'').decode('utf-8').strip()
         if line:
             token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
         else: token,data = '',''
