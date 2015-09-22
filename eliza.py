@@ -127,6 +127,11 @@ class Bot(object):
 
     def create_keywords_list(self, input_text):
         keywords = [word for word in input_text if word in self.language['keys']]
+        for word in input_text:
+            if word not in self.language['keys'] and word in self.language['synon']:
+                for synon in self.language['synon'][word]:
+                    if synon in self.language['keys']:
+                        keywords.append(synon)
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
     #troca placeholders capturados na regex e realiza substituicoes post
@@ -148,9 +153,9 @@ class Bot(object):
         for key in keywords:
             decomps = self.language['keys'][key][1:]
             for decomp in decomps:
-                regex = re.sub('(\s*\*\s*)\i', '*', decomp[0])
-                regex = decomp[0].replace('*','(.*)')
-                regex = re.sub('(@\w+)', lambda match: "(" + "|".join([synon for synon in self.language['synon'][key]]) + ")", regex )
+                regex = re.sub('(\s*\*\s*)', '*', decomp[0])
+                regex = regex.replace('*','(.*)')
+                regex = re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3)]]) + ")", regex )
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text))
                 if input_match is not None:
@@ -158,8 +163,10 @@ class Bot(object):
                     done = True
                     break
             if done: break
+        if not done:
+            print self.language['keys']['xnone'][1][1][0]
 
-input_file = open('eliza.txt', 'r' )
+input_file = open('script_bb.txt', 'r' )
 dic = LanguageDict(input_file)
 dic.build_dictionary()
 bot = Bot(dic.language)

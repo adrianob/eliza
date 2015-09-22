@@ -332,9 +332,6 @@ key: everyone 2
 key: everybody 2
   decomp: *
     reasmb: goto everyone
-key: nobody 2
-  decomp: *
-    reasmb: goto everyone
 key: noone 2
   decomp: *
     reasmb: goto everyone

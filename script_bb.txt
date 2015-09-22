@@ -1,18 +1,27 @@
-pre: . 
-pre: , 
-pre: ? 
-pre: tem  
-pre: a 
-pre: o 
-pre: do 
-pre: da  
-pre: desculpa desculpe
-pre: obrigada obrigado
-synon: esposa mulher
+pre: pq porque
+pre: oq o que
+pre: vc voce
+pre: qdo quando
+pre: qto quantos
+pre: qtos quantos
+pre: ep episodio
+synon: momento parte trecho
+synon: personagem personagens protagonista protagonistas
+synon: gostar gostou gosta pensa opiniao
+synon: favorito favorita
+synon: obrigada obrigado vlw
+synon: voce tu seu sua
+synon: anos idade
+synon: desculpa desculpe perdao
+synon: capitulo capitulos episodios episodio episodios
+synon: alcunha apelido cognome antonomásia epíteto
+synon: esposa esposo mulher casamento casado casada 
+synon: musica trilha tema
 synon: trivia curiosidade curiosidades fatos fato
-synon: trabalho emprego sustento
-synon: ator atores atriz atrizes elenco
-synon: meth metanfetamina droga
+synon: audiencia telespectadores
+synon: trabalho trabalha trabalhos emprego sustento profissão
+synon: ator atores atriz atrizes elenco interpreta papel
+synon: meth metanfetamina metanfetaminas droga 
 synon: quote quotes citação citações
 synon: musica musicas trilha sonora
 synon: inicio iniciou lancamento lancado estreia
@@ -20,60 +29,72 @@ synon: fim final desfecho termino terminado
 synon: premio premios premiacoes emmy award
 synon: serie seriado
 synon: quantos quantas quantidade
-synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* 
+synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* lol lmao
 synon: parceiro colega 
 synon: bordao frase
 synon: Walt Walter
-synon: resumo sinopse sumario
+synon: resumo sinopse sumario sobre quem
+initial: Olá, vamos conversar sobre Breaking Bad?
+quit: xau
+quit: tchau
+quit: adeus
+quit: até mais
+quit: fechar
+quit: sair
+final: Até logo!
 key: @hahaha 1
 	decomp: *
-	reasmb: O que é tão engraçado?
-key: @quantos 8
-	decomp: * @quantos episodios *
+		reasmb: O que é tão engraçado?
+key: @quantos 75
+	decomp: * @quantos * @episodios * @serie *
 		reasmb: Foram produzidos 62 episódios.
-	decomp: * @quantos temporadas *
+	decomp: * @quantos * temporadas *
 		reasmb: Foram produzidas cinco temporadas.
-	decomp: * @quantos episodios primeira *
-		reasmb: A primeira temporada tem X episódios.
-	decomp: * @quantos episodios segunda *
-		reasmb: A segunda temporada tem X episódios.
-	decomp: * @quantos episodios terceira *
-		reasmb: A terceira temporada tem X episódios.
-	decomp: * @quantos episodios quarta *
-		reasmb: A quarta temporada tem X episódios.
-	decomp: * @quantos episodios quinta *
-		reasmb: A quinta temporada tem X episódios.
-	decomp: * @quantos anos voce *
-		reasmb: A minha idade não é importante.
-key: @sumario 8
-	decomp: * @sumario @serie *
-		reasmb: <Sumario da série>
-	decomp: * @sumario primeira *
-		reasmb: <Sumario da primeira temporada>
-	decomp: * @sumario segunda *
-		reasmb: <Sumario da segunda temporada>
-	decomp: * @sumario terceira *
-		reasmb: <Sumario da terceira temporada>
-	decomp: * @sumario quarta *
-		reasmb: <Sumario da quarta temporada>
-	decomp: * @sumario quinta *
-		reasmb: <Sumario da quinta temporada>
-key: quando 8
-	decomb: * quando @inicio *
+	decomp: * @quantos * @episodios * primeira *
+		reasmb: A primeira temporada tem 7 episódios.
+	decomp: * @quantos * @episodios * segunda *
+		reasmb: A segunda temporada tem 13 episódios.
+	decomp: * @quantos * @episodios * terceira *
+		reasmb: A terceira temporada tem 13 episódios.
+	decomp: * @quantos * @episodios * quarta *
+		reasmb: A quarta temporada tem 13 episódios.
+	decomp: * @quantos @episodios quinta *
+		reasmb: A quinta temporada tem 16 episódios.
+key: @musica 30
+	decomp: * @musica *
+		reasmb: A música tema da série foi composta por Dave Porter.
+key: @sumario 70
+	decomp: * @sumario * @serie *
+		reasmb: Walter White é um professor de química na casa dos 50 anos que trabalha em uma escola secundária no Novo México. Para atender às necessidades de Skyler, sua esposa grávida, e Walt Junior, seu filho deficiente físico, ele tem que trabalhar duplamente. Sua vida fica ainda mais complicada quando descobre que está sofrendo de um câncer de pulmão incurável. Para aumentar rapidamente a quantidade de dinheiro que deixaria para sua família após sua morte, Walter usa seu conhecimento de química para fazer e vender metanfetamina, uma droga sintética. Ele conta com a ajuda do ex-aluno e pequeno traficante Jesse e enfrenta vários desafios, incluindo o fato de seu concunhado ser um importante nome dentro da Agência Anti-Drogas da região.
+	decomp: * @sumario * primeira *
+		reasmb: O professor de química do ensino médio, Walter White (Bryan Cranston), é diagnosticado com, avançado e inoperável cancro de pulmão. Num passeio com o seu cunhado, o qual é um agente da DEA, Hank (Dean Norris), Walter vê um ex-aluno dele, Jesse Pinkman (Aaron Paul), fugindo da cena de um laboratório de metanfetamina. Mais tarde, ele encontra Jesse e inventa um plano para se tornarem parceiros na tentativa de combinar suas habilidades para fabricar e distribuir metanfetamina. Walter diz que quer dar estabilidade financeira à sua esposa grávida, Skyler (Anna Gunn) e ao seu filho deficiente, e para pagar seu tratamento caro contra o cancro. Durante os primeiros dias de venda, Walter e Jesse em Albuquerque, se deparam com uma série de problemas com traficantes locais. Ele continua a produzir metanfetamina, apesar desses contratempos sob a alcunha 'Heisenberg'.
+	decomp: * @sumario * segunda *
+		reasmb: Walter continua a encontrar-se diante de contas médicas intransponíveis do seu tratamento contra o câncer. Apesar de ter tido várias más experiências ao produzir metanfetamina com Jesse, Walter concorda em retomar a parceira. Os dois começam a produzir metanfetamina, mas enfrentam vários problemas. O amigo de Jesse, Badger (Matt L. Jones) é preso ao vender metanfetamina em uma operação policial. Walter contrata um advogado, Saul Goodman (Bob Odenkirk), para ajudar Badger. Walter e Jesse dirigem um trailler para o deserto e produzem metanfetamina durante quatro dias. Mais tarde, Combo, outro dos amigos e distribuidores de Jesse, é morto por uma gangue rival por vender metanfetamina em seu território. Saul sugere que os dois encontrem um novo modelo de distribuição. Enquanto isso, Jesse vem construindo um relacionamento com sua vizinha e senhoria, Jane (Krysten Ritter). Jane é revelada estar se recuperando do vício, mas passa por recaídas e os dois começam a injetar heroína. Walter encontra um novo parceiro de negócios, Gus Fring (Giancarlo Esposito), que está disposto a pagar US$ 1,2 milhões para os 17 quilos de metanfetamina que eles produziram. Walter apressadamente oferece o produto para Gus, mas perde o nascimento de sua filha. Walt detém metade do dinheiro por causa do uso de drogas de Jesse, mas Jane descobre sobre isso e chantageia Walt. Walt visita a casa de Jesse, e vê Jane se afogar em seu próprio vômito durante o sono, mas não faz nada para salvá-la. Skyler confronta Walter sobre suas frequentes ausências e desculpas. Ela começa a juntar sua vida secreta e exige que eles se separem.
+	decomp: * @sumario * terceira *
+		reasmb: Walter quer reunir sua família, mas Skyler ainda suspeita da segunda vida de Walter. Walter acredita que ele pode consertar a tensão entre eles, confessando-lhe que ele tem vindo a produzir metanfetamina. Skyler está consternada com a confissão e exige um divórcio formal. Enquanto isso, Gus se oferece para pagar a Walter EUA $ 3 milhões por três meses de seu serviço. Ele mesmo se oferece para fornecer Walter com uma unidade de produção e um assistente de laboratório brilhante, Gale (David Costabile). Jesse continua a produzir e vender metanfetamina por si mesmo. Hank está trabalhando com a DEA para investigar Jesse e está lentamente a reunir provas para fazer uma prisão. Jesse ameaça denunciar o Walter para a polícia se ele for preso, mas Walter oferece a ele a posição de Gale no laboratório. Após a obtenção da posição, Jesse começa a roubar meth do laboratório e vendê-lo em segredo. Jesse se envolveu romanticamente com uma mulher que ele encontra em seu grupo de reabilitação e descobre que seu irmão mais novo, de 11 anos, foi colocado por Gus e seus traficantes de rua para matar Combo. Jesse decide vingar Combo. Walter ajuda Jesse em escapar da ira de Gus. Gus começa a perder a confiança em Walter e pede a Gale para assumir o laboratório. Ele ordena que seus capangas para matar Walter e Jesse. Depois que ele é raptado pelos capangas, Walter instrui Jesse por telefone para matar Gale, a fim de forçar Gus não matar Walter (e, por extensão, Jesse) para que ele não elimine o único químico treinado remanescente.
+	decomp: * @sumario * quarta *
+		reasmb: Jesse segue as instruções e assassinatos de Walter para matar Gale. Gus decide disciplinar os dois através da aplicação de políticas mais rigorosas no laboratório. Ele também tenta quebrar a amizade de Walter e Jesse, atribuindo-lhes detalhes de trabalho separado. Enquanto Walter trabalha no laboratório de metanfetamina, Jesse acompanha Mike (Jonathan Banks), um dos executores de Gus, para recuperar os pagamentos e fornecer suporte. Walter e Jesse estão cada vez mais distante e hostis entre si. Enquanto isso, Hank, que vem se recuperando de seu último envolvimento com o cartel, descobre evidências ligando Gale com Gus. Ele acredita que Gus era um grande distribuidor de drogas e começa a olhar para a evidência tangível para prestar queixa. Gus percebe laços estreitos de Walter com Hank que poderiam comprometer toda a sua operação. Gus ameaça Walter e ameaça matar toda a sua família. Jesse e Walter colocam suas diferenças de lado e aceitam o assassinato de Gus, convencendo o ex-executor do cartel Hector Salamanca a detonar uma bomba suicida ; Hector tem sucesso nessa empreitada, matando a si mesmo, Gus, e Tyrus, capanga de Gus. Walter e Jesse, em seguida, destroem o laboratório de metanfetamina e Walter declara a sua esposa, "eu ganhei".
+	decomp: * @sumario * quinta *
+		reasmb: Após a morte de Gus Fring, Walter cria uma sociedade com Jesse e Mike para uma nova operação de produção e distribuição de metanfetamina. Mike lida com todos os aspectos comerciais do negócio, enquanto Walter e Jesse trabalham com uma equipe de fumigação para produzir metanfetamina em casas isoladas e interditadas para fumigação. Hank e o DEA conseguem identificar nove presos e um advogado com ligações criminosas com Mike. Walter mata Mike e depois contrata Jack Welker, o líder de uma quadrilha neo-nazista, para matar os dez informantes de dentro da prisão. Os negócios de Walter continuam a deslanchar até que ele decide se aposentar após acumular $ 80 milhões, que ele esconde enterrado no deserto. Mais tarde, Hank é convidado para a casa dos White, onde ele inadvertidamente se depara com um dos livros de Walter com uma mensagem assinada por Gale Boetticher. Ele percebe que Walter é o Heisenberg e secretamente reinicia a investigação. Hank faz uma aliança com Jesse, que agora despreza Walter por seus malfeitos. Encurralado, Walter contrata Jack novamente para matar Jesse. Walter tenta confrontar Jesse no deserto, mas Hank faz uma armadilha e o prende. A gangue neonazista chega e Hank se envolve em um tiroteio feroz. Jack executa Hank apesar dos apelos de Walter. Jesse é capturado e coagido a produzir metanfetaminas para a quadrilha. Antes de sair, Jack e sua gangue tomam a maioria do dinheiro de Walter, deixando-o com apenas US $ 11 milhões. Skyler e Walter Jr. ficam arrasados com a morte de Hank e culpam Walter. Eles se recusam a deixar Albuquerque com Walter e, em vez disso, contatam a polícia. Walter passa os próximos vários meses escondido em uma cabana em New Hampshire, enquanto luta contra o câncer. Ele retorna ao Novo México para visitar sua família uma última vez e buscar vingança contra Jack. Mais tarde naquela noite, Walter assassina todos os membros da quadrilha e liberta Jesse, que escapa do complexo antes da polícia chegar. Walter percebe que é mortalmente ferido de um tiro e lentamente sucumbe ao ferimento enquanto a polícia vasculha o complexo.
+	decomp: * @sumario * @personagem *
+		reasmb: <Geral sobre os personagens>
+key: quando 30
+	decomp: * quando * @serie * @inicio *
 		reasmb: O seriado foi lançado em 2008.
-	decomp: * quando @fim *
+	decomp: * quando * @serie * @fim *
 		reasmb: O seriado terminou em 2013.
-key: porque? 2
+key: porque 5
 	decomp: *
 		reasmb: 'Because I say so.'
-key: @desculpe 2
+key: @desculpe 5
 	decomp: *
-		reasmb: 
-key: @obrigado 2
+		reasmb: Pelo quê?
+		reasmb: Não se desculpe.
+key: @obrigado 4
 	decomp: *
 		reasmb: De nada.
 		reasmb: Não há de quê.
-key: @trivia 10
+key: @trivia 80
 	decomp: *
 		reasmb: Vince Gilligan revelou que Jesse Pinkman estava previsto para morrer na primeira temporada, mas mudou de ideia após a performance do ator Aaron Paul.
 		reasmb: Apenas duas vezes na série Jesse se refere à Walt pelo primeiro nome.
@@ -82,63 +103,123 @@ key: @trivia 10
 		reasmb: Na série The Walking Dead, é sugerido que Jesse é o traficante de drogas de Merle Dixon.
 		reasmb: A série teve 62 episódios. O 62 elemento da tabela periódica é o Samário, usado para tratar câncer de pulmão.
 		reasmb: Jesse e Walt Jr. nunca se encontram durante a série inteira.
-		reasmb: 270 pessoas morreram na série (incluindo as do acidente de avião)
+		reasmb: 270 pessoas morreram na série (incluindo as do acidente de avião).
 		reasmb: Walter morre no mesmo dia que nasceu, 7 de setembro.
 		reasmb: Walter e Jesse são os únicos personagens que aparecem em todos os episódios da série.
-key: DEA 1
+key: DEA 10
 	decomp: *
 		reasmb: Divisão que Hank trabalha na polícia, no combate às drogas.
-key: advogado 5
+key: advogado 2
 	decomp: *
 		reasmb: O advogado de Walter era Saul Goodman.
-key: Saul 9
-	decomp: * @ator Saul *
-		reasmb: Bob Odenkirk
-	decomp: * Saul @bordao *
+key: Saul 85
+	decomp: * @ator * Saul *
+		reasmb: Saul Goodman é interpretado por Bob Odenkirk.
+	decomp: * @bordao * Saul *
 		reasmb: Better Call Saul
-	decomp: * @trabalho Saul *
+	decomp: * @trabalho * Saul *
 		reasmb: Saul trabalha como advogado.
-key: @Walter 10
-	decomp: * @ator Walter *
-		reasmb: Bryan Cranston.
-	decomp: * @doenca Walter *
+key: @Walter 90
+	decomp: * @ator * @Walter *
+		reasmb: Walter White é interpretado por Bryan Cranston.
+	decomp: * @sobre * @Walter *
+		reasmb: Walter White, casado com Skyler White, é professor de química do ensino médio e lava carros em suas horas livres para complementar sua renda. Quando descobre que tem câncer, ele fica preocupado com a futura situação financeira de sua família e começa a produzir metanfetaminas com seu parceiro Jesse Pinkman, que era seu ex-aluno.
+	decomp: * @idade * @Walter *
+		reasmb: Walt tem por volta de 50 anos.
+	decomp: * @Walter * nasceu *
+		reasmb: Walter nasceu em 7 de setembro de 1959.
+	decomp: * @doenca * @Walter *
 		reasmb: Walter White teve câncer de pulmão.
-	decomp: * @trabalho Walter *
+	decomp: * @trabalho * @Walter *
 		reasmb: Professor de química do ensino médio e nas horas vagas produtor de metanfetamina.
-	decomp: * filho Walter *
-		reasmb: Walter White, Jr.
-	decomp: * filha Walter *
-		reasmb:
-	decomp: * @esposa Walter *
-		reasmb: Skyler White
-	decomp: * @parceiro Walter *
-		reasmb: Jesse Pinkman
-	decomp: * cunhado Walter *
-		reasmb: Hank Schrader
-key: Skyler 9
-	decomp: * @ator Skyler *
-		reasmb: Anna Gunn
-	decomp: * @marido Skyler *
-		reasmb:
-	decomp: * filho Skyler *
-		reasmb: Walter White, Jr.
-	decomp: * filha Skyler *
-		reasmb:
-	decomp: * irma Skyler *
-		reasmb: Marie Schrader
-key: Hank 9
-	decomp: * @ator Hank *
-		reasmb: Dean Norris
-	decomp: * @trabalho Hank *
+	decomp: * filho * @Walter *
+		reasmb: O filho de Walter se chama Walter White, Jr.
+	decomp: * filha * @Walter *
+		reasmb: Walter teve uma filha chamada Holly.
+	decomp: * @esposa * @Walter *
+		reasmb: Walter era casado com Skyler White.
+	decomp: * @parceiro * @Walter *
+		reasmb: Jesse Pinkman trabalhou com Walt na fabricação de metanfetaminas.
+	decomp: * cunhado * @Walter *
+		reasmb: O cunhado de Walter é Hank Schrader.
+	decomp: * @Walter * @alcunha *
+		reasmb: Walt adotou o nome de Heisenberg em seus negócios.
+key: Skyler 87
+	decomp: * @ator * Skyler *
+		reasmb: Skyler White é interpretada por Anna Gunn.
+	decomp: * @sobre * Skyler *
+		reasmb: Esposa de Walter, grávida do segundo filho do casal, antes do seu diagnóstico e que se torna cada vez mais desconfiada do comportamento do marido.
+	decomp: * @trabalho * Skyler *
+		reasmb: Skyler trabalhou como escritora de histórias curtas, vendedora de itens no eBay e como bibliotecária.
+	decomp: * @idade * Skyler *
+		reasmb: Skyler tem por volta de 40 anos.
+	decomp: * marido * Skyler *
+		reasmb: Skyler é casada com Walter White.
+	decomp: * filho * Skyler *
+		reasmb: O filho de Skyler é Walter White, Jr.
+	decomp: * filha * Skyler *
+		reasmb: A filha de Skyler e Walt se chama Holly.
+	decomp: * irma * Skyler *
+		reasmb: Sua irmã se chama Marie Schrader.
+key: Hank 86
+	decomp: * @ator * Hank *
+		reasmb: Dean Norris interpreta Hank Schrader na série.
+	decomp: * @sobre * Hank *
+		reasmb: Hank Schrader, marido de Marie Schrader, cunhado de Walder e agente do DEA.
+	decomp: * @trabalho * Hank *
 		reasmb: Hank trabalha na polícia, no combate às drogas (DEA).
-	decomp: * @esposa Hank *
-		reasmb: Marie Schrader
-key: Metanfetamina 2
+	decomp: * @esposa * Hank *
+		reasmb: Hank casou com Marie Schrader.
+key: Jesse 88
+	decomp: * @ator * Jesse *
+		reasmb: Jesse Pinkman é interpretado por Aaron Paul.
+	decomp: * @sobre * Jesse *
+		reasmb: Ex-estudante de ensino médio, Jesse Pinkman tem um relacionamento difícil com seus pais e tendência à atividades criminosas. Se une à Walter para produzir metanfetaminas.
+	decomp: * @trabalho * Jesse *
+		reasmb: Jesse produzia metanfetaminas.
+key: Gustavo 82
+	decomp: * @ator * Gustavo *
+		reasmb: Giancarlo Esposito é o ator de Gustavo Fring.
+	decomp: * @trabalho * Gustavo *
+		reasmb: Um grande distribuidor de drogas que tem como disfarce uma rede de fast food chamada Los Pollos Hermanos.
+key: Bryan 50
+	decomp: * @ator * Bryan Cranston *
+		reasmb: Bryan Cranston interpreta Walter White.
+	decomp: * Bryan Cranston * @premios *
+		reasmb: Bryan Cranston ganhou o Primetime Emmy Award de Melhor Ator em Série Dramática três anos consecutivos em 2008, 2009, 2010 e 2014. Cranston também ganhou o prêmio TCA de Realização Individual em Drama em 2009 e o Satellite Award de Melhor Ator - Série de TV: Drama em 2008, 2009 e 2010, bem como o Prêmio Escolha dos Críticos de Televisão de Melhor Ator em Série de Drama e o Saturn Award de Melhor Ator de Televisão em 2012.
+key: Aaron 49
+	decomp: * @ator * Aaron Paul *
+		reasmb: Aaron Paul interpreta Jesse Pinkman.
+	decomp: * Aaron Paul * @premios *
+		reasmb: Aaron Paul ganhou o Primetime Emmy Award de Melhor Ator Coadjuvante em Série Dramática em 2010 e 2012. Paul também ganhou o Saturn Award de Melhor Ator Coadjuvante na televisão em 2010 e 2012.
+key: Anna 48
+	decomp: * @ator * Anna Gunn *
+		reasmb: Anna Gunn interpreta Skyler White.
+	decomp: * Anna Gunn * @premios *
+		reasmb: Anna Gunn ganhou o Primetime Emmy Award para Melhor Atriz Coadjuvante em Série Dramática em 2013.
+key: metanfetamina 5
+	decomp: * cor * @metanfetamina *
+		reasmb: A metanfetamina criada por Walter é de cor azul.
 	decomp: * 
 		reasmb: Droga fabricada por Walter e Jesse.
-key: knock 2
+key: knock 7
 	decomp: *
-	reasmb: I am the one who knocks
-key: say 2
+		reasmb: I am the one who knocks.
+key: say 6
 	decomp: * say my name *
-	reasmb: Heisenberg
+		reasmb: Heisenberg.
+	decomp: *
+		reasmb: 'say' o que?
+key: @voce 100
+	decomp: * @voce * temporada * @favorito *
+		reasmb: <Temporada favorita>
+	decomp: * @voce * @personagem * @favorito *
+		reasmb: <Personagem favorit@>
+	decomp: * @voce * @personagem * menos @favorito *
+		reasmb: <Personagem que odiamos>
+	decomp: * @voce * @momento * @favorito *
+		reasmb: <Momento favorito da série>
+	decomp: * @voce * @pensa * @serie *
+		reasmb: <Opiniao sobre a serie>
+	decomp: * @sobre * @voce *
+		reasm: <Quem sou eu?!?!>
