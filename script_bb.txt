@@ -15,7 +15,7 @@ synon: anos idade
 synon: desculpa desculpe perdao
 synon: capitulo capitulos episodios episodio episodios
 synon: alcunha apelido cognome antonomásia epíteto
-synon: esposa esposo mulher casamento casado casada 
+synon: esposa esposo marido mulher casamento casado casada 
 synon: musica trilha tema
 synon: trivia curiosidade curiosidades fatos fato
 synon: audiencia telespectadores
@@ -42,10 +42,13 @@ quit: até mais
 quit: fechar
 quit: sair
 final: Até logo!
-key: @hahaha 1
+key: xnone 1
+	decomp: *
+		reasmb: Não entendi.
+key: hahaha 1
 	decomp: *
 		reasmb: O que é tão engraçado?
-key: @quantos 75
+key: quantos 75
 	decomp: * @quantos * @episodios * @serie *
 		reasmb: Foram produzidos 62 episódios.
 	decomp: * @quantos * temporadas *
@@ -60,10 +63,10 @@ key: @quantos 75
 		reasmb: A quarta temporada tem 13 episódios.
 	decomp: * @quantos @episodios quinta *
 		reasmb: A quinta temporada tem 16 episódios.
-key: @musica 30
+key: musica 30
 	decomp: * @musica *
 		reasmb: A música tema da série foi composta por Dave Porter.
-key: @sumario 70
+key: sumario 70
 	decomp: * @sumario * @serie *
 		reasmb: Walter White é um professor de química na casa dos 50 anos que trabalha em uma escola secundária no Novo México. Para atender às necessidades de Skyler, sua esposa grávida, e Walt Junior, seu filho deficiente físico, ele tem que trabalhar duplamente. Sua vida fica ainda mais complicada quando descobre que está sofrendo de um câncer de pulmão incurável. Para aumentar rapidamente a quantidade de dinheiro que deixaria para sua família após sua morte, Walter usa seu conhecimento de química para fazer e vender metanfetamina, uma droga sintética. Ele conta com a ajuda do ex-aluno e pequeno traficante Jesse e enfrenta vários desafios, incluindo o fato de seu concunhado ser um importante nome dentro da Agência Anti-Drogas da região.
 	decomp: * @sumario * primeira *
@@ -77,7 +80,7 @@ key: @sumario 70
 	decomp: * @sumario * quinta *
 		reasmb: Após a morte de Gus Fring, Walter cria uma sociedade com Jesse e Mike para uma nova operação de produção e distribuição de metanfetamina. Mike lida com todos os aspectos comerciais do negócio, enquanto Walter e Jesse trabalham com uma equipe de fumigação para produzir metanfetamina em casas isoladas e interditadas para fumigação. Hank e o DEA conseguem identificar nove presos e um advogado com ligações criminosas com Mike. Walter mata Mike e depois contrata Jack Welker, o líder de uma quadrilha neo-nazista, para matar os dez informantes de dentro da prisão. Os negócios de Walter continuam a deslanchar até que ele decide se aposentar após acumular $ 80 milhões, que ele esconde enterrado no deserto. Mais tarde, Hank é convidado para a casa dos White, onde ele inadvertidamente se depara com um dos livros de Walter com uma mensagem assinada por Gale Boetticher. Ele percebe que Walter é o Heisenberg e secretamente reinicia a investigação. Hank faz uma aliança com Jesse, que agora despreza Walter por seus malfeitos. Encurralado, Walter contrata Jack novamente para matar Jesse. Walter tenta confrontar Jesse no deserto, mas Hank faz uma armadilha e o prende. A gangue neonazista chega e Hank se envolve em um tiroteio feroz. Jack executa Hank apesar dos apelos de Walter. Jesse é capturado e coagido a produzir metanfetaminas para a quadrilha. Antes de sair, Jack e sua gangue tomam a maioria do dinheiro de Walter, deixando-o com apenas US $ 11 milhões. Skyler e Walter Jr. ficam arrasados com a morte de Hank e culpam Walter. Eles se recusam a deixar Albuquerque com Walter e, em vez disso, contatam a polícia. Walter passa os próximos vários meses escondido em uma cabana em New Hampshire, enquanto luta contra o câncer. Ele retorna ao Novo México para visitar sua família uma última vez e buscar vingança contra Jack. Mais tarde naquela noite, Walter assassina todos os membros da quadrilha e liberta Jesse, que escapa do complexo antes da polícia chegar. Walter percebe que é mortalmente ferido de um tiro e lentamente sucumbe ao ferimento enquanto a polícia vasculha o complexo.
 	decomp: * @sumario * @personagem *
-		reasmb: <Geral sobre os personagens>
+		reasmb: Walter White e Jesse Pinkman são os personagens principais da série.
 key: quando 30
 	decomp: * quando * @serie * @inicio *
 		reasmb: O seriado foi lançado em 2008.
@@ -86,15 +89,15 @@ key: quando 30
 key: porque 5
 	decomp: *
 		reasmb: 'Because I say so.'
-key: @desculpe 5
+key: desculpe 5
 	decomp: *
 		reasmb: Pelo quê?
 		reasmb: Não se desculpe.
-key: @obrigado 4
+key: obrigado 4
 	decomp: *
 		reasmb: De nada.
 		reasmb: Não há de quê.
-key: @trivia 80
+key: trivia 80
 	decomp: *
 		reasmb: Vince Gilligan revelou que Jesse Pinkman estava previsto para morrer na primeira temporada, mas mudou de ideia após a performance do ator Aaron Paul.
 		reasmb: Apenas duas vezes na série Jesse se refere à Walt pelo primeiro nome.
@@ -119,7 +122,7 @@ key: Saul 85
 		reasmb: Better Call Saul
 	decomp: * @trabalho * Saul *
 		reasmb: Saul trabalha como advogado.
-key: @Walter 90
+key: Walter 90
 	decomp: * @ator * @Walter *
 		reasmb: Walter White é interpretado por Bryan Cranston.
 	decomp: * @sobre * @Walter *
@@ -153,7 +156,7 @@ key: Skyler 87
 		reasmb: Skyler trabalhou como escritora de histórias curtas, vendedora de itens no eBay e como bibliotecária.
 	decomp: * @idade * Skyler *
 		reasmb: Skyler tem por volta de 40 anos.
-	decomp: * marido * Skyler *
+	decomp: * @marido * Skyler *
 		reasmb: Skyler é casada com Walter White.
 	decomp: * filho * Skyler *
 		reasmb: O filho de Skyler é Walter White, Jr.
@@ -210,16 +213,16 @@ key: say 6
 		reasmb: Heisenberg.
 	decomp: *
 		reasmb: 'say' o que?
-key: @voce 100
+key: voce 100
 	decomp: * @voce * temporada * @favorito *
-		reasmb: <Temporada favorita>
+		reasmb: A minha temporada favorita é a quinta. E a sua?
 	decomp: * @voce * @personagem * @favorito *
-		reasmb: <Personagem favorit@>
+		reasmb: Jesse Pinkman é o meu personagem favorito com certeza.
 	decomp: * @voce * @personagem * menos @favorito *
-		reasmb: <Personagem que odiamos>
+		reasmb: A Skyler me deixou irritado.
 	decomp: * @voce * @momento * @favorito *
-		reasmb: <Momento favorito da série>
+		reasmb: O último episódio. E o seu?
 	decomp: * @voce * @pensa * @serie *
-		reasmb: <Opiniao sobre a serie>
+		reasmb: Breaking Bad está entre as minhas séries favoritas! E você, o que pensa sobre a série?
 	decomp: * @sobre * @voce *
-		reasm: <Quem sou eu?!?!>
+		reasmb: Sou só um chatterbot.
