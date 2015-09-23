@@ -131,7 +131,7 @@ key: Walter 90
 		reasmb: Walt tem por volta de 50 anos.
 	decomp: * @Walter * nasceu *
 		reasmb: Walter nasceu em 7 de setembro de 1959.
-	decomp: * @doenca * @Walter *
+	decomp: * doenca * @Walter *
 		reasmb: Walter White teve câncer de pulmão.
 	decomp: * @trabalho * @Walter *
 		reasmb: Professor de química do ensino médio e nas horas vagas produtor de metanfetamina.

@@ -109,6 +109,7 @@ class LanguageDict(object):
 class Bot(object):
     def __init__(self, dictionary):
         self.__language = dictionary
+        self.used_reasmb = []
 
     @property
     def language(self):
@@ -134,15 +135,36 @@ class Bot(object):
                         keywords.append(synon)
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
+    def decomp_used(self, key, decomp):
+        for reasmb in self.used_reasmb:
+            if reasmb[0:2] == [key, decomp[0]]:
+                return True
+        return False
+
+    def get_next_reasmb(self, key, decomp):
+        for index, reasmb in enumerate(self.used_reasmb):
+            if reasmb[0:2] == [key, decomp[0]]:
+                reasmb_index = reasmb[2] + 1
+                if reasmb_index >= len(decomp[1]):
+                    reasmb_index = 0
+                self.used_reasmb[index] = [key, decomp[0], reasmb_index]
+                return reasmb_index
+
     #troca placeholders capturados na regex e realiza substituicoes post
-    def format_result(self, input_match, decomp):
+    def format_result(self, input_match, decomp, key):
+        if self.decomp_used(key, decomp):
+            reasmb_index = self.get_next_reasmb(key, decomp)
+        else:
+            reasmb_index = 0
+            self.used_reasmb.append([key, decomp[0], reasmb_index])
+
+        reasmb = decomp[1][reasmb_index]
         return re.sub('\((\d+)\)',
                 lambda match: " ".join(
                     [word if word not in self.language['post'] 
                           else self.language['post'][word] 
                           for word in input_match.group((int(match.group(1)))).split()]
-                    ),
-                decomp[1][0])
+                    ), reasmb)
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
@@ -159,7 +181,7 @@ class Bot(object):
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text))
                 if input_match is not None:
-                    print self.format_result(input_match, decomp)
+                    print self.format_result(input_match, decomp, key)
                     done = True
                     break
             if done: break
@@ -172,7 +194,7 @@ dic.build_dictionary()
 bot = Bot(dic.language)
 
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(bot.language)
+#pp.pprint(bot.language)
 
 input_file.close()
 
