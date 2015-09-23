@@ -21,14 +21,10 @@ class LanguageDict(object):
         for line in self.input_file:
             formatted_line = line.decode('utf-8').strip().split(':')
             token, data = formatted_line[0], formatted_line[1].strip()
-            if token == 'initial':
-                self.language['initial'] = data
-            elif token == 'final':
-                self.language['final'] = data
-            elif token == 'pre':
-                self.insert_sub(data, self.language['pre'])
-            elif token == 'post':
-                self.insert_sub(data, self.language['post'])
+            if token in ['initial', 'final']:
+                self.language[token] = data
+            elif token in ['pre', 'post']:
+                self.insert_sub(data, self.language[token])
             elif token == 'key':
                 self.read_key(data)
             elif token == 'quit':
@@ -54,16 +50,16 @@ class LanguageDict(object):
 
         while (token in ['decomp', 'reasmb']):
             if token == 'decomp':
-                if ( len(decomp) > 0 ): decomps.append(decomp)
-                decomp = []
-                decomp.append(data)
-                decomp.append([])
+                if ( len(decomp) > 0 ):
+                    decomps.append(decomp)
+                decomp = [data, []]
             else:
                 decomp[1].append(data)
 
             token, data = self.read_next_line()
 
-        if ( len(decomp) > 0 ): decomps.append(decomp)
+        if ( len(decomp) > 0 ):
+            decomps.append(decomp)
         self.language['keys'][keyword] = decomps
         if (token == 'key'): self.read_key(data)
 
