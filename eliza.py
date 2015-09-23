@@ -130,10 +130,7 @@ class Bot(object):
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
     def decomp_used(self, key, decomp_regex):
-        for reasmb in self.used_reasmb:
-            if reasmb[0:2] == [key, decomp_regex]:
-                return True
-        return False
+        return [True for reasmb in self.used_reasmb if reasmb[0:2] == [key, decomp_regex]]
 
     def get_next_reasmb(self, key, decomp_group):
         decomp_regex = decomp_group[0]
