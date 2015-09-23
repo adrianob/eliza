@@ -129,30 +129,32 @@ class Bot(object):
                         keywords.append(synon)
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
-    def decomp_used(self, key, decomp):
+    def decomp_used(self, key, decomp_regex):
         for reasmb in self.used_reasmb:
-            if reasmb[0:2] == [key, decomp[0]]:
+            if reasmb[0:2] == [key, decomp_regex]:
                 return True
         return False
 
-    def get_next_reasmb(self, key, decomp):
+    def get_next_reasmb(self, key, decomp_group):
+        decomp_regex = decomp_group[0]
         for index, reasmb in enumerate(self.used_reasmb):
-            if reasmb[0:2] == [key, decomp[0]]:
+            if reasmb[0:2] == [key, decomp_regex]:
                 reasmb_index = reasmb[2] + 1
-                if reasmb_index >= len(decomp[1]):
+                if reasmb_index >= len(decomp_group[1]):
                     reasmb_index = 0
-                self.used_reasmb[index] = [key, decomp[0], reasmb_index]
+                self.used_reasmb[index] = [key, decomp_regex, reasmb_index]
                 return reasmb_index
 
     #troca placeholders capturados na regex e realiza substituicoes post
-    def format_result(self, input_match, decomp, key):
-        if self.decomp_used(key, decomp):
-            reasmb_index = self.get_next_reasmb(key, decomp)
+    def format_result(self, input_match, decomp_group, key):
+        decomp_regex = decomp_group[0]
+        if self.decomp_used(key, decomp_regex):
+            reasmb_index = self.get_next_reasmb(key, decomp_group)
         else:
             reasmb_index = 0
-            self.used_reasmb.append([key, decomp[0], reasmb_index])
+            self.used_reasmb.append([key, decomp_regex, reasmb_index])
 
-        reasmb = decomp[1][reasmb_index]
+        reasmb = decomp_group[1][reasmb_index]
         return re.sub('\((\d+)\)',
                 lambda match: " ".join(
                     [word if word not in self.language['post'] 
@@ -160,8 +162,8 @@ class Bot(object):
                           for word in input_match.group((int(match.group(1)))).split()]
                     ), reasmb, flags=re.IGNORECASE)
 
-    def generate_decomp_regex(self, decomp):
-        regex = re.sub('(\s*\*\s*)', '*', decomp)
+    def generate_decomp_regex(self, decomp_regex):
+        regex = re.sub('(\s*\*\s*)', '*', decomp_regex)
         regex = regex.replace('*','(.*)')
         return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
 
@@ -173,12 +175,13 @@ class Bot(object):
         done = False
         for key in keywords:
             decomps = self.language['keys'][key][1:]
-            for decomp in decomps:
-                regex = self.generate_decomp_regex(decomp[0])
+            for decomp_group in decomps:
+                decomp_regex = decomp_group[0]
+                regex = self.generate_decomp_regex(decomp_regex)
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text), flags=re.IGNORECASE)
                 if input_match is not None:
-                    print self.format_result(input_match, decomp, key)
+                    print self.format_result(input_match, decomp_group, key)
                     done = True
                     break
             if done: break
