@@ -164,7 +164,7 @@ class Bot(object):
                     [word if word not in self.language['post'] 
                           else self.language['post'][word] 
                           for word in input_match.group((int(match.group(1)))).split()]
-                    ), reasmb)
+                    ), reasmb, flags=re.IGNORECASE)
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
@@ -177,9 +177,9 @@ class Bot(object):
             for decomp in decomps:
                 regex = re.sub('(\s*\*\s*)', '*', decomp[0])
                 regex = regex.replace('*','(.*)')
-                regex = re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3)]]) + ")", regex )
+                regex = re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
                 #procura uma decomposicao que aceita a regex
-                input_match = re.search(regex, " ".join(input_text))
+                input_match = re.search(regex, " ".join(input_text), flags=re.IGNORECASE)
                 if input_match is not None:
                     print self.format_result(input_match, decomp, key)
                     done = True
@@ -200,5 +200,5 @@ input_file.close()
 
 print bot.language['initial']
 while True:
-    input_text = raw_input()
-    bot.generate_response(input_text)
+    input_text = raw_input('>')
+    bot.generate_response(input_text.lower())

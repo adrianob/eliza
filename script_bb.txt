@@ -32,7 +32,7 @@ synon: quantos quantas quantidade
 synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* lol lmao
 synon: parceiro colega 
 synon: bordao frase
-synon: Walt Walter
+synon: walt walter
 synon: resumo sinopse sumario sobre quem
 initial: Olá, vamos conversar sobre Breaking Bad?
 quit: xau
@@ -109,20 +109,20 @@ key: trivia 80
 		reasmb: 270 pessoas morreram na série (incluindo as do acidente de avião).
 		reasmb: Walter morre no mesmo dia que nasceu, 7 de setembro.
 		reasmb: Walter e Jesse são os únicos personagens que aparecem em todos os episódios da série.
-key: DEA 10
+key: dea 10
 	decomp: *
 		reasmb: Divisão que Hank trabalha na polícia, no combate às drogas.
 key: advogado 2
 	decomp: *
 		reasmb: O advogado de Walter era Saul Goodman.
-key: Saul 85
+key: saul 85
 	decomp: * @ator * Saul *
 		reasmb: Saul Goodman é interpretado por Bob Odenkirk.
 	decomp: * @bordao * Saul *
 		reasmb: Better Call Saul
 	decomp: * @trabalho * Saul *
 		reasmb: Saul trabalha como advogado.
-key: Walter 90
+key: walter 90
 	decomp: * @ator * @Walter *
 		reasmb: Walter White é interpretado por Bryan Cranston.
 	decomp: * @sobre * @Walter *
@@ -147,7 +147,7 @@ key: Walter 90
 		reasmb: O cunhado de Walter é Hank Schrader.
 	decomp: * @Walter * @alcunha *
 		reasmb: Walt adotou o nome de Heisenberg em seus negócios.
-key: Skyler 87
+key: skyler 87
 	decomp: * @ator * Skyler *
 		reasmb: Skyler White é interpretada por Anna Gunn.
 	decomp: * @sobre * Skyler *
@@ -164,7 +164,7 @@ key: Skyler 87
 		reasmb: A filha de Skyler e Walt se chama Holly.
 	decomp: * irma * Skyler *
 		reasmb: Sua irmã se chama Marie Schrader.
-key: Hank 86
+key: hank 86
 	decomp: * @ator * Hank *
 		reasmb: Dean Norris interpreta Hank Schrader na série.
 	decomp: * @sobre * Hank *
@@ -173,29 +173,29 @@ key: Hank 86
 		reasmb: Hank trabalha na polícia, no combate às drogas (DEA).
 	decomp: * @esposa * Hank *
 		reasmb: Hank casou com Marie Schrader.
-key: Jesse 88
+key: jesse 88
 	decomp: * @ator * Jesse *
 		reasmb: Jesse Pinkman é interpretado por Aaron Paul.
 	decomp: * @sobre * Jesse *
 		reasmb: Ex-estudante de ensino médio, Jesse Pinkman tem um relacionamento difícil com seus pais e tendência à atividades criminosas. Se une à Walter para produzir metanfetaminas.
 	decomp: * @trabalho * Jesse *
 		reasmb: Jesse produzia metanfetaminas.
-key: Gustavo 82
+key: gustavo 82
 	decomp: * @ator * Gustavo *
 		reasmb: Giancarlo Esposito é o ator de Gustavo Fring.
 	decomp: * @trabalho * Gustavo *
 		reasmb: Um grande distribuidor de drogas que tem como disfarce uma rede de fast food chamada Los Pollos Hermanos.
-key: Bryan 50
+key: bryan 50
 	decomp: * @ator * Bryan Cranston *
 		reasmb: Bryan Cranston interpreta Walter White.
 	decomp: * Bryan Cranston * @premios *
 		reasmb: Bryan Cranston ganhou o Primetime Emmy Award de Melhor Ator em Série Dramática três anos consecutivos em 2008, 2009, 2010 e 2014. Cranston também ganhou o prêmio TCA de Realização Individual em Drama em 2009 e o Satellite Award de Melhor Ator - Série de TV: Drama em 2008, 2009 e 2010, bem como o Prêmio Escolha dos Críticos de Televisão de Melhor Ator em Série de Drama e o Saturn Award de Melhor Ator de Televisão em 2012.
-key: Aaron 49
+key: aaron 49
 	decomp: * @ator * Aaron Paul *
 		reasmb: Aaron Paul interpreta Jesse Pinkman.
 	decomp: * Aaron Paul * @premios *
 		reasmb: Aaron Paul ganhou o Primetime Emmy Award de Melhor Ator Coadjuvante em Série Dramática em 2010 e 2012. Paul também ganhou o Saturn Award de Melhor Ator Coadjuvante na televisão em 2010 e 2012.
-key: Anna 48
+key: anna 48
 	decomp: * @ator * Anna Gunn *
 		reasmb: Anna Gunn interpreta Skyler White.
 	decomp: * Anna Gunn * @premios *
