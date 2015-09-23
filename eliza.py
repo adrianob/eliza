@@ -160,6 +160,11 @@ class Bot(object):
                           for word in input_match.group((int(match.group(1)))).split()]
                     ), reasmb, flags=re.IGNORECASE)
 
+    def generate_decomp_regex(self, decomp):
+        regex = re.sub('(\s*\*\s*)', '*', decomp)
+        regex = regex.replace('*','(.*)')
+        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
+
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
         self.check_for_end(input_text)
@@ -169,9 +174,7 @@ class Bot(object):
         for key in keywords:
             decomps = self.language['keys'][key][1:]
             for decomp in decomps:
-                regex = re.sub('(\s*\*\s*)', '*', decomp[0])
-                regex = regex.replace('*','(.*)')
-                regex = re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
+                regex = self.generate_decomp_regex(decomp[0])
                 #procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text), flags=re.IGNORECASE)
                 if input_match is not None:
