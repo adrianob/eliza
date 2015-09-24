@@ -21,26 +21,16 @@ class LanguageDict(object):
         for line in self.input_file:
             formatted_line = line.decode('utf-8').strip().split(':')
             token, data = formatted_line[0], formatted_line[1].strip()
-            if token == 'initial':
-                self.language['initial'] = data
-            elif token == 'final':
-                self.language['final'] = data
-            elif token == 'pre':
-                self.insert_sub(data, self.language['pre'])
-            elif token == 'post':
-                self.insert_sub(data, self.language['post'])
+            if token in ['initial', 'final']:
+                self.language[token] = data
+            elif token in ['pre', 'post']:
+                self.insert_sub(data, self.language[token])
             elif token == 'key':
                 self.read_key(data)
             elif token == 'quit':
                 self.language['quit'].append(data)
             elif token == 'synon':
                 self.read_synons(data, self.language['synon'])
-
-    # Dado duas string, retorna True se elas são sinônimas, False se não são
-    def are_synonyms(self,string1,string2):
-        l1 = self.language['synon'].get(string1)
-        l2 = self.language['synon'].get(string2)
-        return l1 is not None and l2 is not None and l1 == l2
 
     def read_next_line(self):
         line = next(self.input_file,'').decode('utf-8').strip()
@@ -60,16 +50,16 @@ class LanguageDict(object):
 
         while (token in ['decomp', 'reasmb']):
             if token == 'decomp':
-                if ( len(decomp) > 0 ): decomps.append(decomp)
-                decomp = []
-                decomp.append(data)
-                decomp.append([])
+                if ( len(decomp) > 0 ):
+                    decomps.append(decomp)
+                decomp = [data, []]
             else:
                 decomp[1].append(data)
 
             token, data = self.read_next_line()
 
-        if ( len(decomp) > 0 ): decomps.append(decomp)
+        if ( len(decomp) > 0 ):
+            decomps.append(decomp)
         self.language['keys'][keyword] = decomps
         if (token == 'key'): self.read_key(data)
 
@@ -109,40 +99,65 @@ class LanguageDict(object):
 class Bot(object):
     def __init__(self, dictionary):
         self.__language = dictionary
+        self.used_reasmb = []
 
     @property
     def language(self):
         return self.__language
 
+    #realiza pre-substituicoes
     def substitute_pre(self, input_text):
         input_text = input_text.split()
-        #realiza pre-substituicoes
-        input_text[:] = [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
-        return input_text
+        return [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
 
+    #verifica se acabou o dialogo
     def check_for_end(self, input_text):
-        if " ".join(input_text) in self.language['quit']:
+        if " ".join(input_text).decode('utf-8') in self.language['quit']:
             print self.language['final']
             sys.exit(0)
 
     def create_keywords_list(self, input_text):
         keywords = [word for word in input_text if word in self.language['keys']]
-        for word in input_text:
-            if word not in self.language['keys'] and word in self.language['synon']:
-                for synon in self.language['synon'][word]:
-                    if synon in self.language['keys']:
-                        keywords.append(synon)
+        for word in ( set(input_text) - set(keywords) ).intersection(self.language['synon']):
+            for synon in self.language['synon'][word]:
+                if synon in self.language['keys']:
+                    keywords.append(synon)
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
+    def decomp_used(self, key, decomp_regex):
+        return [True for reasmb in self.used_reasmb if reasmb[0:2] == [key, decomp_regex]]
+
+    def get_next_reasmb(self, key, decomp_group):
+        decomp_regex = decomp_group[0]
+        for index, reasmb in enumerate(self.used_reasmb):
+            if reasmb[0:2] == [key, decomp_regex]:
+                reasmb_index = reasmb[2] + 1
+                if reasmb_index >= len(decomp_group[1]):
+                    reasmb_index = 0
+                self.used_reasmb[index] = [key, decomp_regex, reasmb_index]
+                return reasmb_index
+
     #troca placeholders capturados na regex e realiza substituicoes post
-    def format_result(self, input_match, decomp):
+    def format_result(self, input_match, decomp_group, key):
+        decomp_regex = decomp_group[0]
+        if self.decomp_used(key, decomp_regex):
+            reasmb_index = self.get_next_reasmb(key, decomp_group)
+        else:
+            reasmb_index = 0
+            self.used_reasmb.append([key, decomp_regex, reasmb_index])
+
+        reasmb = decomp_group[1][reasmb_index]
         return re.sub('\((\d+)\)',
                 lambda match: " ".join(
-                    [word if word not in self.language['post'] 
+                    [word.decode('utf-8') if word not in self.language['post'] 
                           else self.language['post'][word] 
                           for word in input_match.group((int(match.group(1)))).split()]
-                    ),
-                decomp[1][0])
+                    ), reasmb, flags=re.IGNORECASE)
+
+    def generate_decomp_regex(self, decomp_regex):
+        regex = re.sub('(\s*\*\s*)', '*', decomp_regex)
+        regex = regex.replace('*','(.*)')
+        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
@@ -152,14 +167,13 @@ class Bot(object):
         done = False
         for key in keywords:
             decomps = self.language['keys'][key][1:]
-            for decomp in decomps:
-                regex = re.sub('(\s*\*\s*)', '*', decomp[0])
-                regex = regex.replace('*','(.*)')
-                regex = re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3)]]) + ")", regex )
+            for decomp_group in decomps:
+                decomp_regex = decomp_group[0]
+                regex = self.generate_decomp_regex(decomp_regex)
                 #procura uma decomposicao que aceita a regex
-                input_match = re.search(regex, " ".join(input_text))
+                input_match = re.search(regex, " ".join(input_text), flags=re.IGNORECASE)
                 if input_match is not None:
-                    print self.format_result(input_match, decomp)
+                    print self.format_result(input_match, decomp_group, key)
                     done = True
                     break
             if done: break
@@ -172,11 +186,11 @@ dic.build_dictionary()
 bot = Bot(dic.language)
 
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(bot.language)
+#pp.pprint(bot.language)
 
 input_file.close()
 
 print bot.language['initial']
 while True:
-    input_text = raw_input()
-    bot.generate_response(input_text)
+    input_text = raw_input('>')
+    bot.generate_response(input_text.lower())
