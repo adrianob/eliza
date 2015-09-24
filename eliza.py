@@ -105,12 +105,12 @@ class Bot(object):
     def language(self):
         return self.__language
 
+    #realiza pre-substituicoes
     def substitute_pre(self, input_text):
         input_text = input_text.split()
-        #realiza pre-substituicoes
-        input_text[:] = [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
-        return input_text
+        return [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
 
+    #verifica se acabou o dialogo
     def check_for_end(self, input_text):
         if " ".join(input_text) in self.language['quit']:
             print self.language['final']
@@ -118,11 +118,10 @@ class Bot(object):
 
     def create_keywords_list(self, input_text):
         keywords = [word for word in input_text if word in self.language['keys']]
-        for word in input_text:
-            if word not in self.language['keys'] and word in self.language['synon']:
-                for synon in self.language['synon'][word]:
-                    if synon in self.language['keys']:
-                        keywords.append(synon)
+        for word in ( set(input_text) - set(keywords) ).intersection(self.language['synon']):
+            for synon in self.language['synon'][word]:
+                if synon in self.language['keys']:
+                    keywords.append(synon)
         return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
 
     def decomp_used(self, key, decomp_regex):
