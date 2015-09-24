@@ -5,6 +5,11 @@ pre: qdo quando
 pre: qto quantos
 pre: qtos quantos
 pre: ep episodio
+post: eu você
+post: você eu
+post: tu eu
+post: é sou
+post: teu meu
 synon: momento parte trecho
 synon: personagem personagens protagonista protagonistas
 synon: gostar gostou gosta pensa opiniao
@@ -34,6 +39,7 @@ synon: parceiro colega
 synon: bordao frase
 synon: walt walter
 synon: resumo sinopse sumario sobre quem
+synon: test testing
 initial: Olá, vamos conversar sobre Breaking Bad?
 quit: xau
 quit: tchau
@@ -45,6 +51,15 @@ final: Até logo!
 key: xnone 1
 	decomp: *
 		reasmb: Não entendi.
+key: test 200
+  decomp: @parceiro *
+    reasmb: 1 = (1) 2 = (2)
+  decomp: testando @test
+    reasmb: (1)
+    reasmb: segundo
+  decomp: * @test *
+    reasmb: 1 = (1) 2 = (2) 3 = (3)
+    reasmb: 2 = (2) 3 = (3) 1 = (1)
 key: hahaha 1
 	decomp: *
 		reasmb: O que é tão engraçado?

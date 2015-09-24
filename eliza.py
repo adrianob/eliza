@@ -112,7 +112,7 @@ class Bot(object):
 
     #verifica se acabou o dialogo
     def check_for_end(self, input_text):
-        if " ".join(input_text) in self.language['quit']:
+        if " ".join(input_text).decode('utf-8') in self.language['quit']:
             print self.language['final']
             sys.exit(0)
 
@@ -149,7 +149,7 @@ class Bot(object):
         reasmb = decomp_group[1][reasmb_index]
         return re.sub('\((\d+)\)',
                 lambda match: " ".join(
-                    [word if word not in self.language['post'] 
+                    [word.decode('utf-8') if word not in self.language['post'] 
                           else self.language['post'][word] 
                           for word in input_match.group((int(match.group(1)))).split()]
                     ), reasmb, flags=re.IGNORECASE)
