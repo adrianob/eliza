@@ -4,6 +4,7 @@ import re
 import pprint
 import sys
 
+
 class LanguageDict(object):
     def __init__(self, input_file):
         self.language = {
@@ -33,10 +34,12 @@ class LanguageDict(object):
                 self.read_synons(data, self.language['synon'])
 
     def read_next_line(self):
-        line = next(self.input_file,'').decode('utf-8').strip()
+        line = next(self.input_file, '').decode('utf-8').strip()
         if line:
-            token, data = line.split(':')[0].strip(), line.split(':')[1].strip()
-        else: token,data = '',''
+            line = line.split(':')
+            token, data = line[0].strip(), line[1].strip()
+        else:
+            token, data = '', ''
         return token, data
 
     def read_key(self, keyword):
@@ -50,7 +53,7 @@ class LanguageDict(object):
 
         while (token in ['decomp', 'reasmb']):
             if token == 'decomp':
-                if ( len(decomp) > 0 ):
+                if (len(decomp) > 0):
                     decomps.append(decomp)
                 decomp = [data, []]
             else:
@@ -58,10 +61,11 @@ class LanguageDict(object):
 
             token, data = self.read_next_line()
 
-        if ( len(decomp) > 0 ):
+        if (len(decomp) > 0):
             decomps.append(decomp)
         self.language['keys'][keyword] = decomps
-        if (token == 'key'): self.read_key(data)
+        if (token == 'key'):
+            self.read_key(data)
 
     @staticmethod
     def get_weight(keyword):
@@ -96,6 +100,7 @@ class LanguageDict(object):
         for palavra in lista_sinonimos[-1]:
             dicionario[palavra] = lista_sinonimos[-1]
 
+
 class Bot(object):
     def __init__(self, dictionary):
         self.__language = dictionary
@@ -105,24 +110,26 @@ class Bot(object):
     def language(self):
         return self.__language
 
-    #realiza pre-substituicoes
+    # realiza pre-substituicoes
     def substitute_pre(self, input_text):
         input_text = input_text.split()
-        return [word if word not in self.language['pre'] else self.language['pre'][word] for word in input_text]
+        return [word if word not in self.language['pre']
+                else self.language['pre'][word] for word in input_text]
 
-    #verifica se acabou o dialogo
+    # verifica se acabou o dialogo
     def check_for_end(self, input_text):
         if " ".join(input_text).decode('utf-8') in self.language['quit']:
             print self.language['final']
             sys.exit(0)
 
     def create_keywords_list(self, input_text):
-        keywords = [word for word in input_text if word in self.language['keys']]
-        for word in ( set(input_text) - set(keywords) ).intersection(self.language['synon']):
+        keywords = [word for word in input_text
+                    if word in self.language['keys']]
+        for word in (set(input_text) - set(keywords)).intersection(self.language['synon']):
             for synon in self.language['synon'][word]:
                 if synon in self.language['keys']:
                     keywords.append(synon)
-        return sorted(keywords, reverse= True, key=lambda key: self.language['keys'][key][0])
+        return sorted(keywords, reverse=True, key=lambda key: self.language['keys'][key][0])
 
     def decomp_used(self, key, decomp_regex):
         return [True for reasmb in self.used_reasmb if reasmb[0:2] == [key, decomp_regex]]
@@ -137,7 +144,7 @@ class Bot(object):
                 self.used_reasmb[index] = [key, decomp_regex, reasmb_index]
                 return reasmb_index
 
-    #troca placeholders capturados na regex e realiza substituicoes post
+    # troca placeholders capturados na regex e realiza substituicoes post
     def format_result(self, input_match, decomp_group, key):
         decomp_regex = decomp_group[0]
         if self.decomp_used(key, decomp_regex):
@@ -148,16 +155,16 @@ class Bot(object):
 
         reasmb = decomp_group[1][reasmb_index]
         return re.sub('\((\d+)\)',
-                lambda match: " ".join(
-                    [word.decode('utf-8') if word not in self.language['post'] 
-                          else self.language['post'][word] 
-                          for word in input_match.group((int(match.group(1)))).split()]
-                    ), reasmb, flags=re.IGNORECASE)
+                      lambda match: " ".join(
+                          [word.decode('utf-8') if word not in self.language['post']
+                           else self.language['post'][word]
+                           for word in input_match.group((int(match.group(1)))).split()]
+                          ), reasmb, flags=re.IGNORECASE)
 
     def generate_decomp_regex(self, decomp_regex):
         regex = re.sub('(\s*\*\s*)', '*', decomp_regex)
-        regex = regex.replace('*','(.*)')
-        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex )
+        regex = regex.replace('*', '(.*)')
+        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex)
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
@@ -170,17 +177,18 @@ class Bot(object):
             for decomp_group in decomps:
                 decomp_regex = decomp_group[0]
                 regex = self.generate_decomp_regex(decomp_regex)
-                #procura uma decomposicao que aceita a regex
+                # procura uma decomposicao que aceita a regex
                 input_match = re.search(regex, " ".join(input_text), flags=re.IGNORECASE)
                 if input_match is not None:
                     print self.format_result(input_match, decomp_group, key)
                     done = True
                     break
-            if done: break
+            if done:
+                break
         if not done:
             print self.language['keys']['xnone'][1][1][0]
 
-input_file = open('script_bb.txt', 'r' )
+input_file = open('script_bb.txt', 'r')
 dic = LanguageDict(input_file)
 dic.build_dictionary()
 bot = Bot(dic.language)
