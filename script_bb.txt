@@ -5,7 +5,7 @@ pre: qdo quando
 pre: qto quantos
 pre: qtos quantos
 pre: ep episódio
-pre: não não
+pre: nao não
 pre: voce você
 post: eu você
 post: você eu
@@ -150,7 +150,7 @@ key: walter 90
 		reasmb: Walt tem por volta de 50 anos.
 	decomp: * @Walter * nasceu *
 		reasmb: Walter nasceu em 7 de setembro de 1959.
-	decomp: * doenca * @Walter *
+	decomp: * @doença * @Walter *
 		reasmb: Walter White teve câncer de pulmão.
 	decomp: * @trabalho * @Walter *
 		reasmb: Professor de química do ensino médio e nas horas vagas produtor de metanfetamina.
@@ -284,11 +284,11 @@ key: eu 99
 		reasmb: Eu concordo.
 		reasmb: Eu discordo.
 		reasmb: Você acha mesmo que (2)?
-	decomp: eu tambem
+	decomp: eu também
 		reasmb: E o que você achou disso?
 	decomp: eu discordo *
 		reasmb: Porque?
 	decomp: eu concordo *
 		reasmb: Legal.
 	decomp: eu *
-		reasmb: você (1)?
+		reasmb: Você (1)?
