@@ -38,7 +38,7 @@ synon: musica musicas trilha sonora
 synon: inicio iniciou lançamento lançado estreia
 synon: fim final desfecho termino terminado
 synon: prêmio prêmios premiações emmy award
-synon: serie seriado
+synon: série seriado
 synon: quantos quantas quantidade
 synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* lol lmao
 synon: parceiro colega
@@ -82,10 +82,10 @@ key: quantos 75
 		reasmb: A quarta temporada tem 13 episódios.
 	decomp: * @quantos @episódios quinta *
 		reasmb: A quinta temporada tem 16 episódios.
-key: musica 30
+key: música 30
 	decomp: * @música *
 		reasmb: A música tema da série foi composta por Dave Porter.
-key: sumario 70
+key: sumário 70
 	decomp: * @sumário * @série *
 		reasmb: Walter White é um professor de química na casa dos 50 anos que trabalha em uma escola secundária no Novo México. Para atender às necessidades de Skyler, sua esposa grávida, e Walt Junior, seu filho deficiente físico, ele tem que trabalhar duplamente. Sua vida fica ainda mais complicada quando descobre que está sofrendo de um câncer de pulmão incurável. Para aumentar rapidamente a quantidade de dinheiro que deixaria para sua família após sua morte, Walter usa seu conhecimento de química para fazer e vender metanfetamina, uma droga sintética. Ele conta com a ajuda do ex-aluno e pequeno traficante Jesse e enfrenta vários desafios, incluindo o fato de seu concunhado ser um importante nome dentro da Agência Anti-Drogas da região.
 	decomp: * @sumário * primeira *
@@ -222,7 +222,7 @@ key: anna 48
 key: metanfetamina 5
 	decomp: * cor * @metanfetamina *
 		reasmb: A metanfetamina criada por Walter é de cor azul.
-	decomp: * 
+	decomp: *
 		reasmb: Droga fabricada por Walter e Jesse.
 key: knock 7
 	decomp: *

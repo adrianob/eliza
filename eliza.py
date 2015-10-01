@@ -156,17 +156,20 @@ class Bot(object):
             self.used_reasmb.append([key, decomp_regex, reasmb_index])
 
         reasmb = decomp_group[1][reasmb_index]
-        return re.sub('\((\d+)\)',
+        return re.sub(ur'(?u)\((\d+)\)',
                       lambda match: " ".join(
                           [word if word not in self.language['post']
                            else self.language['post'][word]
                            for word in input_match.group((int(match.group(1)))).split()]
                           ), reasmb, flags=re.IGNORECASE)
 
+    def synon_regex(self, match):
+        return "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")"
+
     def generate_decomp_regex(self, decomp_regex):
         regex = re.sub('(\s*\*\s*)', '*', decomp_regex)
         regex = regex.replace('*', '(.*)')
-        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex)
+        return re.sub(ur'(?u)((@)(\w+))', self.synon_regex, regex)
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
