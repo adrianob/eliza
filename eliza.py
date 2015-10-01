@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 import re
 import pprint
+import locale
 import sys
+import codecs
 
 
 class LanguageDict(object):
@@ -20,7 +22,7 @@ class LanguageDict(object):
 
     def build_dictionary(self):
         for line in self.input_file:
-            formatted_line = line.decode('utf-8').strip().split(':')
+            formatted_line = line.strip().split(':')
             token, data = formatted_line[0], formatted_line[1].strip()
             if token in ['initial', 'final']:
                 self.language[token] = data
@@ -34,7 +36,7 @@ class LanguageDict(object):
                 self.read_synons(data, self.language['synon'])
 
     def read_next_line(self):
-        line = next(self.input_file, '').decode('utf-8').strip()
+        line = next(self.input_file, '').strip()
         if line:
             line = line.split(':')
             token, data = line[0].strip(), line[1].strip()
@@ -118,7 +120,7 @@ class Bot(object):
 
     # verifica se acabou o dialogo
     def check_for_end(self, input_text):
-        if " ".join(input_text).decode('utf-8') in self.language['quit']:
+        if " ".join(input_text) in self.language['quit']:
             print self.language['final']
             sys.exit(0)
 
@@ -154,17 +156,20 @@ class Bot(object):
             self.used_reasmb.append([key, decomp_regex, reasmb_index])
 
         reasmb = decomp_group[1][reasmb_index]
-        return re.sub('\((\d+)\)',
+        return re.sub(ur'(?u)\((\d+)\)',
                       lambda match: " ".join(
-                          [word.decode('utf-8') if word not in self.language['post']
+                          [word if word not in self.language['post']
                            else self.language['post'][word]
                            for word in input_match.group((int(match.group(1)))).split()]
                           ), reasmb, flags=re.IGNORECASE)
 
+    def synon_regex(self, match):
+        return "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")"
+
     def generate_decomp_regex(self, decomp_regex):
         regex = re.sub('(\s*\*\s*)', '*', decomp_regex)
         regex = regex.replace('*', '(.*)')
-        return re.sub('((@)(\w+))', lambda match: "(" + "|".join([synon for synon in self.language['synon'][match.group(3).lower()]]) + ")", regex)
+        return re.sub(ur'(?u)((@)(\w+))', self.synon_regex, regex)
 
     def generate_response(self, input_text):
         input_text = self.substitute_pre(input_text)
@@ -188,17 +193,18 @@ class Bot(object):
         if not done:
             print self.language['keys']['xnone'][1][1][0]
 
-input_file = open('script_bb.txt', 'r')
+input_file = codecs.open('script_bb.txt','r','utf-8')
+
 dic = LanguageDict(input_file)
 dic.build_dictionary()
 bot = Bot(dic.language)
 
 pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(bot.language)
+pp.pprint(bot.language)
 
 input_file.close()
 
 print bot.language['initial']
 while True:
-    input_text = raw_input('>')
+    input_text = raw_input('>').decode(sys.stdin.encoding or locale.getpreferredencoding(True))
     bot.generate_response(input_text.lower())
