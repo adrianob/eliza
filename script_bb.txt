@@ -250,7 +250,7 @@ key: você 100
 	decomp: e @você *
 		reasmb: E eu o que?
 	decomp: * @você *
-			decomp: E o meu o quê?
+		reasmb: E eu o quê?
 key: meu 98
 	decomp: * meu * temporada * @favorito *
 		reasmb: Mesmo? Sua temporada favorita é a (5)?
