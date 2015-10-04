@@ -13,12 +13,11 @@ post: tu eu
 post: é sou
 post: teu meu
 post: meu seu
-synon: acho achei penso
-synon: assistir assistiu olhou
+synon: acho achei penso gostar gostou gosta pensa opinião
+synon: assistir assisti assistiu olhou
 synon: doença câncer
 synon: momento parte trecho
 synon: personagem personagens protagonista protagonistas
-synon: gostar gostou gosta pensa opinião
 synon: favorito favorita preferido preferida
 synon: obrigada obrigado vlw
 synon: você tu seu sua
@@ -250,7 +249,7 @@ key: você 100
 	decomp: e @você *
 		reasmb: E eu o que?
 	decomp: * @você *
-			decomp: E o meu o quê?
+		reasmb: E eu o quê?
 key: meu 98
 	decomp: * meu * temporada * @favorito *
 		reasmb: Mesmo? Sua temporada favorita é a (5)?
