@@ -13,6 +13,13 @@ post: tu eu
 post: é sou
 post: teu meu
 post: meu seu
+post: gostei gostou
+post: adorei adorou
+post: amei amou
+post: curti curtiu
+post: odiei odiou
+post: sei sabe
+post: quero quer
 synon: acho achei penso gostar gostou gosta pensa opinião
 synon: assistir assisti assistiu olhou
 synon: doença câncer
