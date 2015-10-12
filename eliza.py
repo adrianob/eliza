@@ -199,9 +199,6 @@ dic = LanguageDict(input_file)
 dic.build_dictionary()
 bot = Bot(dic.language)
 
-pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(bot.language)
-
 input_file.close()
 
 print bot.language['initial']
