@@ -204,4 +204,5 @@ input_file.close()
 print bot.language['initial']
 while True:
     input_text = raw_input('>').decode(sys.stdin.encoding or locale.getpreferredencoding(True))
+    input_text = re.sub('[\?\.\,-:]',' ',input_text)
     bot.generate_response(input_text.lower())
