@@ -13,6 +13,16 @@ post: tu eu
 post: é sou
 post: teu meu
 post: meu seu
+post: gostei gostou
+post: adorei adorou
+post: amei amou
+post: curti curtiu
+post: odiei odiou
+post: sei sabe
+post: quero quer
+synon: bordão frase
+synon: uma_das_temporadas primeira segunda terceira quarta quinta
+synon: meu minha
 synon: acho achei penso gostar gostou gosta pensa opinião
 synon: assistir assisti assistiu olhou
 synon: doença câncer
@@ -136,7 +146,7 @@ key: advogado 2
 key: saul 85
 	decomp: * @ator * Saul *
 		reasmb: Saul Goodman é interpretado por Bob Odenkirk.
-	decomp: * @bordao * Saul *
+	decomp: * @bordão * Saul *
 		reasmb: Better Call Saul
 	decomp: * @trabalho * Saul *
 		reasmb: Saul trabalha como advogado.
@@ -251,17 +261,17 @@ key: você 100
 	decomp: * @você *
 		reasmb: E eu o quê?
 key: meu 98
-	decomp: * meu * temporada * @favorito *
-		reasmb: Mesmo? Sua temporada favorita é a (5)?
+	decomp: * @meu * temporada * @favorita * quinta *
+		reasmb: A minha temporada favorita também é a quinta!
+	decomp: * @meu * temporada * @favorito * @uma_das_temporadas *
+		reasmb: Mesmo? Sua temporada favorita é a (7)?
 		reasmb: Que legal!
-	decomp: * meu * @personagem * @favorito *
+	decomp: * @meu * @personagem * @favorito *
 		reasmb: Seu personagem favorito é (6)?
-	decomp: * meu * @personagem * menos @favorito *
+	decomp: * @meu * @personagem * menos @favorito *
 		reasmb: Sério? Eu sempre gostei del@.
-	decomp: * meu * @momento * @favorito *
+	decomp: * @meu * @momento * @favorito *
 		reasmb: Eu também adorei essa parte.
-	decomp: * meu * @assistir * nenhum *
-		reasmb: Então vá assistir agora mesmo!
 key: sim
 	decomp: sim *
 		reasmb: Interessante.
@@ -273,6 +283,8 @@ key: eu 99
 	decomp: eu * @assistir * todos *
 		reasmb: É isso aí, e o que você achou da série?
 		reasmb: Incrível.
+	decomp: * eu * @assistir * nenhum *
+		reasmb: Então vá assistir agora mesmo!
 	decomp: eu sei *
 		reasmb: Certo, não vou me repetir.
 	decomp: eu não sei *
@@ -283,7 +295,7 @@ key: eu 99
 		reasmb: Eu concordo.
 		reasmb: Eu discordo.
 		reasmb: Você acha mesmo que (2)?
-	decomp: eu também
+	decomp: eu também *
 		reasmb: E o que você achou disso?
 	decomp: eu discordo *
 		reasmb: Porque?
