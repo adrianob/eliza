@@ -1,0 +1,24 @@
+﻿Script da conversa
+Olá, vamos conversar sobre Breaking Bad?
+>Você já assistiu essa série?
+Eu já assistiu o serieado, e você?
+>Eu também!
+Que legal!
+>E qual a sua temporada favorita?
+A minha temporada favorita é a quinta. E a sua?
+>A minha temporada favorita é a quarta.
+Mesmo? Sua temporada favorita é a quarta?
+>Sim
+Interessante.
+>Porque?
+'Because I say so.'
+>E qual o seu personagem favorito?
+Jesse Pinkman é o meu personagem favorito com certeza.
+>hahaha
+O que é tão engraçado?
+>Eu sabia.
+Você sabia?
+>Sim
+Interessante.
+>Tchau
+Até logo!
