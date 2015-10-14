@@ -248,10 +248,14 @@ key: você 100
 		reasmb: Jesse Pinkman é o meu personagem favorito com certeza.
 	decomp: * @você * @personagem * menos @favorito *
 		reasmb: A Skyler me deixou irritado.
+	decomp: * @você * @episódio * @favorito *
+		reasmb: O meu episódio favorito é o último, com certeza, e o seu?
 	decomp: * @você * @momento * @favorito *
 		reasmb: O último episódio. E o seu?
 	decomp: * @você * @assistir * @seriado
-		reasmb: Eu assisti todos os episódios e você?
+		reasmb: Eu já assisti o seriado, e você?
+	decomp: * @você * @assistir * @episódios
+		reasmb: Eu já assisti todos os episódios, e você?
 	decomp: * @você * @pensa * @série *
 		reasmb: Breaking Bad está entre as minhas séries favoritas! E você, o que pensa sobre a série?
 	decomp: * @sobre * @você *
@@ -296,6 +300,7 @@ key: eu 99
 		reasmb: Eu discordo.
 		reasmb: Você acha mesmo que (2)?
 	decomp: eu também *
+		reasmb: Que legal!
 		reasmb: E o que você achou disso?
 	decomp: eu discordo *
 		reasmb: Porque?
