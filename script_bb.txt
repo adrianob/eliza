@@ -252,9 +252,9 @@ key: você 100
 		reasmb: O meu episódio favorito é o último, com certeza, e o seu?
 	decomp: * @você * @momento * @favorito *
 		reasmb: O último episódio. E o seu?
-	decomp: * @você * @assistir * @seriado
+	decomp: * @você * @assistir * @seriado *
 		reasmb: Eu já assisti o seriado, e você?
-	decomp: * @você * @assistir * @episódios
+	decomp: * @você * @assistir * @episódios *
 		reasmb: Eu já assisti todos os episódios, e você?
 	decomp: * @você * @pensa * @série *
 		reasmb: Breaking Bad está entre as minhas séries favoritas! E você, o que pensa sobre a série?
@@ -276,13 +276,14 @@ key: meu 98
 		reasmb: Sério? Eu sempre gostei del@.
 	decomp: * @meu * @momento * @favorito *
 		reasmb: Eu também adorei essa parte.
-key: sim
-	decomp: sim *
+key: sim 3
+	decomp: *
 		reasmb: Interessante.
 		reasmb: Porque sim?
-key: não
-	decomp: não *
+key: não 3
+	decomp: *
 		reasmb: Ok.
+		reasmb: Porque não?
 key: eu 99
 	decomp: eu * @assistir * todos *
 		reasmb: É isso aí, e o que você achou da série?
