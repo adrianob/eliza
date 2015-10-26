@@ -1,12 +1,13 @@
 pre: pq porque
 pre: oq o que
+pre: voce você
 pre: vc você
 pre: qdo quando
 pre: qto quantos
 pre: qtos quantos
 pre: ep episódio
 pre: nao não
-pre: voce você
+pre: serie série
 post: eu você
 post: você eu
 post: tu eu
@@ -14,17 +15,22 @@ post: é sou
 post: teu meu
 post: meu seu
 post: gostei gostou
+post: gosto gosta
 post: adorei adorou
+post: adoro adora
 post: amei amou
+post: amo ama
 post: curti curtiu
+post: curto curte
 post: odiei odiou
+post: odeio odeia
 post: sei sabe
 post: quero quer
 synon: bordão frase
 synon: uma_das_temporadas primeira segunda terceira quarta quinta
 synon: meu minha
 synon: acho achei penso gostar gostou gosta pensa opinião
-synon: assistir assisti assistiu olhou
+synon: assistir assisti assistiu olhou vi
 synon: doença câncer
 synon: momento parte trecho
 synon: personagem personagens protagonista protagonistas
@@ -37,7 +43,7 @@ synon: capítulo capítulos episódio episódios
 synon: alcunha apelido cognome antonomásia epíteto
 synon: esposa esposo marido mulher casamento casado casada
 synon: música trilha tema
-synon: trívia curiosidade curiosidades fatos fato
+synon: trívia curiosidade curiosidades fatos fato interessante
 synon: audiência telespectadores
 synon: trabalho trabalha trabalhos emprego sustento profissão
 synon: ator atores atriz atrizes elenco interpreta papel
@@ -47,7 +53,7 @@ synon: musica musicas trilha sonora
 synon: inicio iniciou lançamento lançado estreia
 synon: fim final desfecho termino terminado
 synon: prêmio prêmios premiações emmy award
-synon: série seriado
+synon: série seriado breaking
 synon: quantos quantas quantidade
 synon: haha hahaha hahahaha kk kkk kkkk kkkkk kkkkkk hehe hehehe *risada* *risadas* *rir* lol lmao
 synon: parceiro colega
@@ -62,6 +68,12 @@ quit: até mais
 quit: fechar
 quit: sair
 final: Até logo!
+key: ok 1
+	decomp: *
+		reasmb: Certo.
+key: certo 1
+	decomp: *
+		reasmb: Ok.
 key: oi 1
 	decomp: *
 		reasmb: Olá.
