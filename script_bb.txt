@@ -7,7 +7,6 @@ pre: qto quantos
 pre: qtos quantos
 pre: ep episódio
 pre: nao não
-pre: voce você
 pre: serie série
 post: eu você
 post: você eu
